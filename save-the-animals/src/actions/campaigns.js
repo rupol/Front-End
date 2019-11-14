@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../utils/api";
 
 export const FETCH_CAMPAIGN_START = "FETCH_CAMPAIGN_START";
 export const FETCH_CAMPAIGN_SUCCESS = "FETCH_CAMPAIGN_SUCCESS";
@@ -8,8 +8,8 @@ export function fetchCampaign() {
   return dispatch => {
     dispatch({ type: FETCH_CAMPAIGN_START });
 
-    axios
-      .get("https://saving-the-animals.herokuapp.com/api/campaigns/supporters")
+    api()
+      .get("/campaigns/supporters")
       .then(res => {
         dispatch({ type: FETCH_CAMPAIGN_SUCCESS, payload: res.data });
       })
