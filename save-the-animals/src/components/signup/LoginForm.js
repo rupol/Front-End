@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { Link } from "react-router-dom";
 import {colors} from '../../colors';
 import { connect } from 'react-redux';
-import { doLogin } from '../../actions';
+import { doLogin } from '../../actions/Campaigns';
 
 
 const LoginFormStyle = styled.div`

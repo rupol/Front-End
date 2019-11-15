@@ -3,7 +3,7 @@ import {withFormik, Field, Form} from "formik";
 import styled from "styled-components";
 import {colors} from '../../colors';
 import { connect } from 'react-redux';
-import { createUser } from '../../actions';
+import { createUser } from '../../actions/Campaigns';
 
 const OrganizationFormStyle = styled.section`
     form {
