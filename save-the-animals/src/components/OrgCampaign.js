@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const OrgCampaign = props => {
   return (
@@ -8,11 +9,11 @@ const OrgCampaign = props => {
       <h3>Species: {props.campaign.species}</h3>
       <h3>Urgency: {props.campaign.urgency}</h3>
       <div className="campaign-buttons">
-        <button
-          onClick={props.handleEdit}
-          value={props.campaign.campaigns_id}
+        <Link
+          className="account-update"
+          to={`/org-campaigns/${props.campaign.campaigns_id}`}
           className="fas fa-edit fa-xlg edit-button"
-        ></button>
+        ></Link>
         <button
           onClick={props.handleDelete}
           value={props.campaign.campaigns_id}

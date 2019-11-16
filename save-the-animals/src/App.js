@@ -10,6 +10,7 @@ import OrgCampaigns from "./components/OrgCampaigns";
 import NewCampaign from "./components/NewCampaign";
 
 import { getToken } from "./utils/api";
+import UpdateCampaign from "./components/UpdateCampaign";
 
 function App() {
   const loggedIn = getToken();
@@ -46,6 +47,11 @@ function App() {
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={SignUp} />
       <ProtectedRoute exact path="/org-campaigns" component={OrgCampaigns} />
+      <ProtectedRoute
+        exact
+        path="/org-campaigns/:id"
+        component={UpdateCampaign}
+      />
       <ProtectedRoute exact path="/new-campaign" component={NewCampaign} />
       <ProtectedRoute exact path="/logout" component={Logout} />
     </div>
