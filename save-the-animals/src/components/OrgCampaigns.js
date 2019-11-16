@@ -46,10 +46,6 @@ function OrgCampaigns(props) {
       });
   };
 
-  const handleEdit = event => {
-    event.preventDefault();
-  };
-
   return (
     <div className="main-section">
       <h1>My Campaigns</h1>
@@ -60,7 +56,6 @@ function OrgCampaigns(props) {
               key={campaign.campaigns_id}
               campaign={campaign}
               handleDelete={handleDelete}
-              handleEdit={handleEdit}
             />
           ))}
         </div>

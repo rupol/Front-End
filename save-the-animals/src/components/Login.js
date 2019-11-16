@@ -44,7 +44,7 @@ function Login(props) {
           props.history.push("/org-campaigns");
           console.log("org:", isOrg); //should be true
         } else {
-          // props.history.push("/all-campaigns");
+          props.history.push("/all-campaigns");
           console.log("org:", isOrg); //should be false
         }
       })
