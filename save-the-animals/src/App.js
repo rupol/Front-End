@@ -11,6 +11,7 @@ import NewCampaign from "./components/NewCampaign";
 
 import { getToken } from "./utils/api";
 import UpdateCampaign from "./components/UpdateCampaign";
+import AllCampaigns from "./components/AllCampaigns";
 
 function App() {
   const loggedIn = getToken();
@@ -52,6 +53,7 @@ function App() {
         path="/org-campaigns/:id"
         component={UpdateCampaign}
       />
+      <ProtectedRoute exact path="/all-campaigns" component={AllCampaigns} />
       <ProtectedRoute exact path="/new-campaign" component={NewCampaign} />
       <ProtectedRoute exact path="/logout" component={Logout} />
     </div>

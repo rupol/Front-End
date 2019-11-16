@@ -11,7 +11,7 @@ function SignUp(props) {
     email: "",
     password: "",
     userType: "",
-    organization_id: ""
+    organization_id: null
   });
 
   useEffect(() => {
