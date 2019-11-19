@@ -10,9 +10,8 @@ const OrgCampaign = props => {
       <h3>Urgency: {props.campaign.urgency}</h3>
       <div className="campaign-buttons">
         <Link
-          className="account-update"
-          to={`/org-campaigns/${props.campaign.campaigns_id}`}
           className="fas fa-edit fa-xlg edit-button"
+          to={`/org-campaigns/${props.campaign.campaigns_id}`}
         ></Link>
         <button
           onClick={props.handleDelete}

@@ -28,7 +28,7 @@ function AllCampaigns(props) {
       {!isLoading && campaigns.length ? (
         <div>
           {campaigns.map(campaign => (
-            <Campaign key={campaign.campaigns_id} campaign={campaign} />
+            <Campaign key={campaign.id} campaign={campaign} />
           ))}
         </div>
       ) : !isLoading && !campaigns.length ? (

@@ -13,7 +13,6 @@ function OrgCampaigns(props) {
     api()
       .get("/campaigns/organizations")
       .then(res => {
-        console.log(res);
         setCampaigns(res.data.campaigns);
         setIsLoading(false);
       })
@@ -24,16 +23,13 @@ function OrgCampaigns(props) {
 
   const handleDelete = event => {
     event.preventDefault();
-    console.log(event.target.value);
     setIsLoading(true);
     api()
       .delete(`/campaigns/${event.target.value}`)
       .then(res => {
-        console.log(res);
         api()
           .get("/campaigns/organizations")
           .then(res => {
-            console.log(res);
             setCampaigns(res.data.campaigns);
             setIsLoading(false);
           })

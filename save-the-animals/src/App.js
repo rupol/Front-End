@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, NavLink, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -13,7 +14,7 @@ import { getToken } from "./utils/api";
 import UpdateCampaign from "./components/UpdateCampaign";
 import AllCampaigns from "./components/AllCampaigns";
 
-function App() {
+function App(props) {
   const loggedIn = getToken();
 
   return (
@@ -30,15 +31,21 @@ function App() {
           Sign Up
         </NavLink>
       )}
-      {loggedIn && (
-        <NavLink exact to="/org-campaigns">
-          Campaigns
+      {loggedIn && props.userType === "organization" ? (
+        <>
+          <NavLink exact to="/org-campaigns">
+            Campaigns
+          </NavLink>
+          <NavLink exact to="/new-campaign">
+            New Campaign
+          </NavLink>
+        </>
+      ) : loggedIn && props.userType === "supporter" ? (
+        <NavLink exact to="/all-campaigns">
+          All Campaigns
         </NavLink>
-      )}
-      {loggedIn && (
-        <NavLink exact to="/new-campaign">
-          New Campaign
-        </NavLink>
+      ) : (
+        <></>
       )}
       {loggedIn && (
         <NavLink exact to="/logout">
@@ -60,4 +67,10 @@ function App() {
   );
 }
 
-export default withRouter(App);
+const mapStateToProps = state => {
+  return {
+    userType: state.userType
+  };
+};
+
+export default withRouter(connect(mapStateToProps, {})(App));

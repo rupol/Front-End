@@ -3,7 +3,12 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import { connect } from "react-redux";
-import { fetchOrgList } from "../actions/action";
+import {
+  fetchOrgList,
+  setUserType,
+  setOrganID,
+  LogIn
+} from "../actions/action";
 
 function SignUp(props) {
   const [user, setUser] = useState({
@@ -25,12 +30,23 @@ function SignUp(props) {
     });
   };
 
+  const setUserType = event => {
+    if (user.userType === "organization") {
+      props.setUserType("organization");
+      props.setOrganID(user.organization_id);
+    } else {
+      props.setUserType("supporter");
+    }
+  };
+
   const handleSubmit = event => {
     event.preventDefault();
+    setUserType();
     axios
       .post("https://saving-the-animals.herokuapp.com/api/auth/register", user)
       .then(res => {
         console.log(res);
+        props.LogIn(user, props.userType, props.history);
       })
       .catch(err => console.log(err));
   };
@@ -109,8 +125,14 @@ function SignUp(props) {
 
 const mapStateToProps = state => {
   return {
-    orgList: state.orgList
+    orgList: state.orgList,
+    userType: state.userType
   };
 };
 
-export default connect(mapStateToProps, { fetchOrgList })(SignUp);
+export default connect(mapStateToProps, {
+  fetchOrgList,
+  setUserType,
+  setOrganID,
+  LogIn
+})(SignUp);

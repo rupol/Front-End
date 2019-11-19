@@ -9,7 +9,7 @@ function NewCampaign(props) {
     species: "",
     urgency: "",
     image_url: "",
-    organization_id: Number(localStorage.getItem("organ_id"))
+    organization_id: Number(props.organID)
   });
 
   const handleChanges = event => {
@@ -21,11 +21,9 @@ function NewCampaign(props) {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log(newCampaign);
     api()
       .post("/campaigns", newCampaign)
       .then(res => {
-        console.log(res);
         props.history.push("/org-campaigns");
       })
       .catch(err => {
@@ -91,7 +89,8 @@ function NewCampaign(props) {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    organID: state.organID
   };
 };
 

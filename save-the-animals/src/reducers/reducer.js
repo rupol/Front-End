@@ -1,8 +1,9 @@
-import { FETCH_ORGS, SET_USER } from "../actions/action";
+import { FETCH_ORGS, SET_USER_TYPE, SET_ORGAN_ID } from "../actions/action";
 
 const initialState = {
   orgList: [],
-  user: {}
+  userType: "",
+  organID: null
 };
 
 export function reducer(state = initialState, action) {
@@ -12,10 +13,15 @@ export function reducer(state = initialState, action) {
         ...state,
         orgList: action.payload
       };
-    case SET_USER:
+    case SET_USER_TYPE:
       return {
         ...state,
-        user: action.payload
+        userType: action.payload
+      };
+    case SET_ORGAN_ID:
+      return {
+        ...state,
+        organID: action.payload
       };
     default:
       return state;

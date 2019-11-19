@@ -2,17 +2,13 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import api from "../utils/api";
-
-import { setUserToState } from "../actions/action";
+import { setUserType, LogIn } from "../actions/action";
 
 function Login(props) {
   const [user, setUser] = useState({
     username: "",
     password: ""
   });
-
-  const [isOrg, setIsOrg] = useState(false);
 
   const handleChange = event => {
     setUser({
@@ -23,34 +19,15 @@ function Login(props) {
 
   const setUserType = event => {
     if (event.target.value === "organization") {
-      setIsOrg(true);
-      console.log(event.target.value);
+      props.setUserType("organization");
     } else {
-      console.log(event.target.value);
+      props.setUserType("supporter");
     }
   };
 
   const handleSubmit = event => {
     event.preventDefault();
-
-    api()
-      .post("/auth/login", user)
-      .then(res => {
-        console.log(res);
-        props.setUserToState(user);
-        localStorage.setItem("organ_id", res.data.organ_id);
-        localStorage.setItem("token", res.data.token);
-        if (isOrg) {
-          props.history.push("/org-campaigns");
-          console.log("org:", isOrg); //should be true
-        } else {
-          props.history.push("/all-campaigns");
-          console.log("org:", isOrg); //should be false
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    props.LogIn(user, props.userType, props.history);
   };
 
   return (
@@ -98,8 +75,8 @@ function Login(props) {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    userType: state.userType
   };
 };
 
-export default connect(mapStateToProps, { setUserToState })(Login);
+export default connect(mapStateToProps, { setUserType, LogIn })(Login);
