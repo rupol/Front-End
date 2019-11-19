@@ -4,6 +4,9 @@ import api from "../utils/api";
 export const FETCH_ORGS = "FETCH_ORGS";
 export const SET_USER_TYPE = "SET_USER_TYPE";
 export const SET_ORGAN_ID = "SET_ORGAN_ID";
+export const REQUEST_START = "REQUEST_START";
+export const REQUEST_SUCCESS = "REQUEST_SUCCESS";
+export const REQUEST_ERROR = "REQUEST_ERROR";
 
 export function fetchOrgList() {
   return dispatch => {
@@ -32,9 +35,11 @@ export function setOrganID(id) {
 
 export function LogIn(user, userType, history) {
   return dispatch => {
+    dispatch({ type: REQUEST_START });
     api()
       .post("/auth/login", user)
       .then(res => {
+        dispatch({ type: REQUEST_SUCCESS });
         localStorage.setItem("token", res.data.token);
         if (userType === "organization") {
           dispatch({ type: SET_ORGAN_ID, payload: res.data.organ_id });
@@ -44,7 +49,7 @@ export function LogIn(user, userType, history) {
         }
       })
       .catch(err => {
-        console.log(err);
+        dispatch({ type: REQUEST_ERROR, payload: err });
       });
   };
 }

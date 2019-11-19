@@ -41,6 +41,7 @@ function Login(props) {
           placeholder="Username"
           value={user.username}
           onChange={handleChange}
+          required
         />
         <label htmlFor="password">Password</label>
         <input
@@ -49,6 +50,7 @@ function Login(props) {
           placeholder="Password"
           value={user.password}
           onChange={handleChange}
+          required
         />
         <div className="user-type-inputs">
           <p>Account Type</p>
@@ -60,6 +62,7 @@ function Login(props) {
               id="organization"
               value="organization"
               onChange={setUserType}
+              required
             />
           </div>
           <div className="user-input supp-input">
@@ -70,6 +73,7 @@ function Login(props) {
               id="supporter"
               value="support"
               onChange={setUserType}
+              required
             />
           </div>
         </div>

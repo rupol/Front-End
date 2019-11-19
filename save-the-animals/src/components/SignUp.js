@@ -62,6 +62,7 @@ function SignUp(props) {
           placeholder="Username"
           value={user.username}
           onChange={handleChange}
+          required
         />
         <label htmlFor="email">Email</label>
         <input
@@ -70,6 +71,7 @@ function SignUp(props) {
           placeholder="Email"
           value={user.email}
           onChange={handleChange}
+          required
         />
         <label htmlFor="password">Password</label>
         <input
@@ -78,6 +80,7 @@ function SignUp(props) {
           placeholder="Password"
           value={user.password}
           onChange={handleChange}
+          required
         />
         <div className="user-type-inputs">
           <p>Account Type</p>
@@ -89,6 +92,7 @@ function SignUp(props) {
               id="organization"
               value="organization"
               onChange={handleChange}
+              required
             />
           </div>
           <div className="user-input supp-input">
@@ -99,6 +103,7 @@ function SignUp(props) {
               id="supporter"
               value="support"
               onChange={handleChange}
+              required
             />
           </div>
         </div>

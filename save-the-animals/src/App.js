@@ -14,6 +14,8 @@ import { getToken } from "./utils/api";
 import UpdateCampaign from "./components/UpdateCampaign";
 import AllCampaigns from "./components/AllCampaigns";
 
+import loader from "./img/loader.gif";
+
 function App(props) {
   const loggedIn = getToken();
 
@@ -55,25 +57,39 @@ function App(props) {
           </NavLink>
         )}
       </nav>
-
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/signup" component={SignUp} />
-      <ProtectedRoute exact path="/org-campaigns" component={OrgCampaigns} />
-      <ProtectedRoute
-        exact
-        path="/org-campaigns/:id"
-        component={UpdateCampaign}
-      />
-      <ProtectedRoute exact path="/all-campaigns" component={AllCampaigns} />
-      <ProtectedRoute exact path="/new-campaign" component={NewCampaign} />
-      <ProtectedRoute exact path="/logout" component={Logout} />
+      {props.isLoading ? (
+        <img src={loader} alt="loading" className="loader" />
+      ) : (
+        <>
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={SignUp} />
+          <ProtectedRoute
+            exact
+            path="/org-campaigns"
+            component={OrgCampaigns}
+          />
+          <ProtectedRoute
+            exact
+            path="/org-campaigns/:id"
+            component={UpdateCampaign}
+          />
+          <ProtectedRoute
+            exact
+            path="/all-campaigns"
+            component={AllCampaigns}
+          />
+          <ProtectedRoute exact path="/new-campaign" component={NewCampaign} />
+          <ProtectedRoute exact path="/logout" component={Logout} />
+        </>
+      )}
     </div>
   );
 }
 
 const mapStateToProps = state => {
   return {
-    userType: state.userType
+    userType: state.userType,
+    isLoading: state.isLoading
   };
 };
 

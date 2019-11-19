@@ -43,6 +43,7 @@ function NewCampaign(props) {
           placeholder="Campaign Title"
           value={newCampaign.title}
           onChange={handleChanges}
+          required
         />
         <label htmlFor="formLocation">Location</label>
         <input
@@ -52,6 +53,7 @@ function NewCampaign(props) {
           placeholder="Location"
           value={newCampaign.location}
           onChange={handleChanges}
+          required
         />
         <label htmlFor="formSpecies">Species</label>
         <input
@@ -61,8 +63,9 @@ function NewCampaign(props) {
           placeholder="Species"
           value={newCampaign.species}
           onChange={handleChanges}
+          required
         />
-        <label htmlFor="formUrgency">Urgency (1 = most urgent)</label>
+        <label htmlFor="formUrgency">Urgency (1 = least urgent)</label>
         <input
           type="number"
           min="1"
@@ -72,6 +75,7 @@ function NewCampaign(props) {
           placeholder="Urgency"
           value={newCampaign.urgency}
           onChange={handleChanges}
+          required
         />
         <button className="btn" type="submit">
           Add

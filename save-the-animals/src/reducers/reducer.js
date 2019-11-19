@@ -1,13 +1,40 @@
-import { FETCH_ORGS, SET_USER_TYPE, SET_ORGAN_ID } from "../actions/action";
+import {
+  FETCH_ORGS,
+  SET_USER_TYPE,
+  SET_ORGAN_ID,
+  REQUEST_START,
+  REQUEST_SUCCESS,
+  REQUEST_ERROR
+} from "../actions/action";
 
 const initialState = {
   orgList: [],
   userType: "",
-  organID: null
+  organID: null,
+  isLoading: false,
+  error: null
 };
 
 export function reducer(state = initialState, action) {
   switch (action.type) {
+    case REQUEST_START:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case REQUEST_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        error: null
+      };
+    case REQUEST_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
     case FETCH_ORGS:
       return {
         ...state,
