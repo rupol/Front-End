@@ -35,9 +35,7 @@ function NewCampaign(props) {
     <div className="main-section">
       <h1>Add a New Campaign</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="formTitle" hidden>
-          Campaign Title:
-        </label>
+        <label htmlFor="formTitle">Title</label>
         <input
           type="text"
           id="formTitle"
@@ -46,9 +44,7 @@ function NewCampaign(props) {
           value={newCampaign.title}
           onChange={handleChanges}
         />
-        <label htmlFor="formLocation" hidden>
-          Location:
-        </label>
+        <label htmlFor="formLocation">Location</label>
         <input
           type="text"
           id="formLocation"
@@ -57,9 +53,7 @@ function NewCampaign(props) {
           value={newCampaign.location}
           onChange={handleChanges}
         />
-        <label htmlFor="formSpecies" hidden>
-          Species:
-        </label>
+        <label htmlFor="formSpecies">Species</label>
         <input
           type="text"
           id="formSpecies"
@@ -68,20 +62,20 @@ function NewCampaign(props) {
           value={newCampaign.species}
           onChange={handleChanges}
         />
-        <label htmlFor="formUrgency" hidden>
-          Urgency:
-        </label>
+        <label htmlFor="formUrgency">Urgency (1 = most urgent)</label>
         <input
           type="number"
           min="1"
           max="10"
           id="formUrgency"
           name="urgency"
-          placeholder="Urgency (1=most urgent)"
+          placeholder="Urgency"
           value={newCampaign.urgency}
           onChange={handleChanges}
         />
-        <button type="submit">Add Campaign</button>
+        <button className="btn" type="submit">
+          Add
+        </button>
       </form>
     </div>
   );

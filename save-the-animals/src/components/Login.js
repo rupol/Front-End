@@ -32,8 +32,9 @@ function Login(props) {
 
   return (
     <div className="main-section">
-      <h2>Log In</h2>
+      <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
+        <label htmlFor="username">Username</label>
         <input
           type="text"
           name="username"
@@ -41,6 +42,7 @@ function Login(props) {
           value={user.username}
           onChange={handleChange}
         />
+        <label htmlFor="password">Password</label>
         <input
           type="password"
           name="password"
@@ -48,23 +50,33 @@ function Login(props) {
           value={user.password}
           onChange={handleChange}
         />
-        <input
-          type="radio"
-          name="userType"
-          id="organization"
-          value="organization"
-          onChange={setUserType}
-        />
-        <label htmlFor="organization">Organization</label>
-        <input
-          type="radio"
-          name="userType"
-          id="supporter"
-          value="support"
-          onChange={setUserType}
-        />
-        <label htmlFor="supporter">Supporter</label>
-        <button type="submit">Log In</button>
+        <div className="user-type-inputs">
+          <p>Account Type</p>
+          <div className="user-input org-input">
+            <label htmlFor="organization">Organization</label>
+            <input
+              type="radio"
+              name="userType"
+              id="organization"
+              value="organization"
+              onChange={setUserType}
+            />
+          </div>
+          <div className="user-input supp-input">
+            <label htmlFor="supporter">Supporter</label>
+            <input
+              type="radio"
+              name="userType"
+              id="supporter"
+              value="support"
+              onChange={setUserType}
+            />
+          </div>
+        </div>
+
+        <button className="btn" type="submit">
+          Log In
+        </button>
       </form>
       <h3>
         Don't have an account? <Link to="/signup">Sign Up</Link>

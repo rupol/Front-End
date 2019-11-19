@@ -106,7 +106,9 @@ function UpdateCampaign(props) {
           value={campaign.urgency}
           onChange={handleChanges}
         />
-        <button type="submit">Update Campaign</button>
+        <button className="btn" type="submit">
+          Update
+        </button>
       </form>
     </div>
   );

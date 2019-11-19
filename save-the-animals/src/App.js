@@ -19,39 +19,43 @@ function App(props) {
 
   return (
     <div className="App">
-      <h1>Save the Animals</h1>
-      <NavLink to="/">Home</NavLink>
-      {!loggedIn && (
-        <NavLink exact to="/login">
-          Log In
+      <nav>
+        <NavLink className="logo" exact to="/">
+          Save the Animals
         </NavLink>
-      )}
-      {!loggedIn && (
-        <NavLink exact to="/signup">
-          Sign Up
-        </NavLink>
-      )}
-      {loggedIn && props.userType === "organization" ? (
-        <>
-          <NavLink exact to="/org-campaigns">
-            Campaigns
+        {!loggedIn && (
+          <NavLink exact to="/login">
+            Log In
           </NavLink>
-          <NavLink exact to="/new-campaign">
-            New Campaign
+        )}
+        {!loggedIn && (
+          <NavLink exact to="/signup">
+            Sign Up
           </NavLink>
-        </>
-      ) : loggedIn && props.userType === "supporter" ? (
-        <NavLink exact to="/all-campaigns">
-          All Campaigns
-        </NavLink>
-      ) : (
-        <></>
-      )}
-      {loggedIn && (
-        <NavLink exact to="/logout">
-          Log Out
-        </NavLink>
-      )}
+        )}
+        {loggedIn && props.userType === "organization" ? (
+          <>
+            <NavLink exact to="/org-campaigns">
+              Campaigns
+            </NavLink>
+            <NavLink exact to="/new-campaign">
+              New Campaign
+            </NavLink>
+          </>
+        ) : loggedIn && props.userType === "supporter" ? (
+          <NavLink exact to="/all-campaigns">
+            All Campaigns
+          </NavLink>
+        ) : (
+          <></>
+        )}
+        {loggedIn && (
+          <NavLink exact to="/logout">
+            Log Out
+          </NavLink>
+        )}
+      </nav>
+
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={SignUp} />
       <ProtectedRoute exact path="/org-campaigns" component={OrgCampaigns} />
