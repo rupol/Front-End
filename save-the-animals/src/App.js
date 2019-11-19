@@ -14,62 +14,82 @@ import { getToken } from "./utils/api";
 import UpdateCampaign from "./components/UpdateCampaign";
 import AllCampaigns from "./components/AllCampaigns";
 
+import loader from "./img/loader.gif";
+
 function App(props) {
   const loggedIn = getToken();
 
   return (
     <div className="App">
-      <h1>Save the Animals</h1>
-      <NavLink to="/">Home</NavLink>
-      {!loggedIn && (
-        <NavLink exact to="/login">
-          Log In
+      <nav>
+        <NavLink className="logo" exact to="/">
+          Save the Animals
         </NavLink>
-      )}
-      {!loggedIn && (
-        <NavLink exact to="/signup">
-          Sign Up
-        </NavLink>
-      )}
-      {loggedIn && props.userType === "organization" ? (
-        <>
-          <NavLink exact to="/org-campaigns">
-            Campaigns
+        {!loggedIn && (
+          <NavLink exact to="/login">
+            Log In
           </NavLink>
-          <NavLink exact to="/new-campaign">
-            New Campaign
+        )}
+        {!loggedIn && (
+          <NavLink exact to="/signup">
+            Sign Up
           </NavLink>
-        </>
-      ) : loggedIn && props.userType === "supporter" ? (
-        <NavLink exact to="/all-campaigns">
-          All Campaigns
-        </NavLink>
+        )}
+        {loggedIn && props.userType === "organization" ? (
+          <>
+            <NavLink exact to="/org-campaigns">
+              Campaigns
+            </NavLink>
+            <NavLink exact to="/new-campaign">
+              New Campaign
+            </NavLink>
+          </>
+        ) : loggedIn && props.userType === "supporter" ? (
+          <NavLink exact to="/all-campaigns">
+            All Campaigns
+          </NavLink>
+        ) : (
+          <></>
+        )}
+        {loggedIn && (
+          <NavLink exact to="/logout">
+            Log Out
+          </NavLink>
+        )}
+      </nav>
+      {props.isLoading ? (
+        <img src={loader} alt="loading" className="loader" />
       ) : (
-        <></>
+        <>
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={SignUp} />
+          <ProtectedRoute
+            exact
+            path="/org-campaigns"
+            component={OrgCampaigns}
+          />
+          <ProtectedRoute
+            exact
+            path="/org-campaigns/:id"
+            component={UpdateCampaign}
+          />
+          <ProtectedRoute
+            exact
+            path="/all-campaigns"
+            component={AllCampaigns}
+          />
+          <ProtectedRoute exact path="/new-campaign" component={NewCampaign} />
+          <ProtectedRoute exact path="/logout" component={Logout} />
+        </>
       )}
-      {loggedIn && (
-        <NavLink exact to="/logout">
-          Log Out
-        </NavLink>
-      )}
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/signup" component={SignUp} />
-      <ProtectedRoute exact path="/org-campaigns" component={OrgCampaigns} />
-      <ProtectedRoute
-        exact
-        path="/org-campaigns/:id"
-        component={UpdateCampaign}
-      />
-      <ProtectedRoute exact path="/all-campaigns" component={AllCampaigns} />
-      <ProtectedRoute exact path="/new-campaign" component={NewCampaign} />
-      <ProtectedRoute exact path="/logout" component={Logout} />
     </div>
   );
 }
 
 const mapStateToProps = state => {
   return {
-    userType: state.userType
+    userType: state.userType,
+    isLoading: state.isLoading
   };
 };
 

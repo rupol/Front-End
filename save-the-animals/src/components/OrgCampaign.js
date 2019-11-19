@@ -8,15 +8,17 @@ const OrgCampaign = props => {
       <h3>Location: {props.campaign.location}</h3>
       <h3>Species: {props.campaign.species}</h3>
       <h3>Urgency: {props.campaign.urgency}</h3>
+      <h3>Funding Recieved: ${props.campaign.funding_received}</h3>
+      <h3>Funding Needed: ${props.campaign.totalFunding_needed}</h3>
       <div className="campaign-buttons">
         <Link
-          className="fas fa-edit fa-xlg edit-button"
+          className="fas fa-edit fa-xlg btn edit-button"
           to={`/org-campaigns/${props.campaign.campaigns_id}`}
         ></Link>
         <button
           onClick={props.handleDelete}
           value={props.campaign.campaigns_id}
-          className="fas fa-trash fa-xlg delete-button"
+          className="fas fa-trash fa-xlg btn delete-button"
         ></button>
       </div>
     </div>

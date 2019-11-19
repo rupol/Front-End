@@ -53,47 +53,62 @@ function SignUp(props) {
 
   return (
     <div className="main-section">
-      <h2>Sign Up</h2>
+      <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
+        <label htmlFor="username">Username</label>
         <input
           type="text"
           name="username"
           placeholder="Username"
           value={user.username}
           onChange={handleChange}
+          required
         />
+        <label htmlFor="email">Email</label>
         <input
           type="email"
           name="email"
           placeholder="Email"
           value={user.email}
           onChange={handleChange}
+          required
         />
+        <label htmlFor="password">Password</label>
         <input
           type="password"
           name="password"
           placeholder="Password"
           value={user.password}
           onChange={handleChange}
+          required
         />
-        <input
-          type="radio"
-          name="userType"
-          id="organization"
-          value="organization"
-          onChange={handleChange}
-        />
-        <label htmlFor="organization">Organization</label>
-        <input
-          type="radio"
-          name="userType"
-          id="supporter"
-          value="support"
-          onChange={handleChange}
-        />
-        <label htmlFor="supporter">Supporter</label>
+        <div className="user-type-inputs">
+          <p>Account Type</p>
+          <div className="user-input org-input">
+            <label htmlFor="organization">Organization</label>
+            <input
+              type="radio"
+              name="userType"
+              id="organization"
+              value="organization"
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="user-input supp-input">
+            <label htmlFor="supporter">Supporter</label>
+            <input
+              type="radio"
+              name="userType"
+              id="supporter"
+              value="support"
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
         {user.userType === "organization" && (
-          <div>
+          <div className="org-select">
             <label htmlFor="organization_id">
               Select your organization: <br />
             </label>
@@ -114,7 +129,9 @@ function SignUp(props) {
             </select>
           </div>
         )}
-        <button type="submit">Sign Up</button>
+        <button className="btn" type="submit">
+          Sign Up
+        </button>
       </form>
       <h3>
         Already have an account? <Link to="/login">Log In</Link>

@@ -60,9 +60,7 @@ function UpdateCampaign(props) {
     <div className="main-section">
       <h1>Update A Campaign</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="formTitle" hidden>
-          Campaign Title:
-        </label>
+        <label htmlFor="formTitle">Campaign Title</label>
         <input
           type="text"
           id="formTitle"
@@ -71,9 +69,7 @@ function UpdateCampaign(props) {
           value={campaign.title}
           onChange={handleChanges}
         />
-        <label htmlFor="formLocation" hidden>
-          Location:
-        </label>
+        <label htmlFor="formLocation">Location</label>
         <input
           type="text"
           id="formLocation"
@@ -82,9 +78,7 @@ function UpdateCampaign(props) {
           value={campaign.location}
           onChange={handleChanges}
         />
-        <label htmlFor="formSpecies" hidden>
-          Species:
-        </label>
+        <label htmlFor="formSpecies">Species</label>
         <input
           type="text"
           id="formSpecies"
@@ -93,9 +87,7 @@ function UpdateCampaign(props) {
           value={campaign.species}
           onChange={handleChanges}
         />
-        <label htmlFor="formUrgency" hidden>
-          Urgency:
-        </label>
+        <label htmlFor="formUrgency">Urgency (1 = least urgent)</label>
         <input
           type="number"
           min="1"
@@ -106,7 +98,9 @@ function UpdateCampaign(props) {
           value={campaign.urgency}
           onChange={handleChanges}
         />
-        <button type="submit">Update Campaign</button>
+        <button className="btn" type="submit">
+          Update
+        </button>
       </form>
     </div>
   );
