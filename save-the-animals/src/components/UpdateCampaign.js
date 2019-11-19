@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import api from "../utils/api";
+import { connect } from "react-redux";
 
 function UpdateCampaign(props) {
   const [campaign, setCampaign] = useState({
@@ -8,14 +9,13 @@ function UpdateCampaign(props) {
     species: "",
     urgency: "",
     image_url: "",
-    organization_id: Number(localStorage.getItem("organ_id"))
+    organization_id: Number(props.organID)
   });
 
   useEffect(() => {
     api()
       .get(`/campaigns/organizations`)
       .then(result => {
-        console.log(result.data.campaigns);
         result.data.campaigns.map(camp => {
           camp.campaigns_id === Number(props.match.params.id) &&
             setCampaign({
@@ -42,15 +42,13 @@ function UpdateCampaign(props) {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log(campaign);
     setCampaign({
       ...campaign,
-      organization_id: Number(localStorage.getItem("organ_id"))
+      organization_id: Number(props.organID)
     });
     api()
       .put(`/campaigns/${props.match.params.id}`, campaign)
       .then(res => {
-        console.log(res);
         props.history.push("/org-campaigns");
       })
       .catch(err => {
@@ -114,4 +112,10 @@ function UpdateCampaign(props) {
   );
 }
 
-export default UpdateCampaign;
+const mapStateToProps = state => {
+  return {
+    organID: state.organID
+  };
+};
+
+export default connect(mapStateToProps, {})(UpdateCampaign);
