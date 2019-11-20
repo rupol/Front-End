@@ -40,6 +40,7 @@ function UpdateCampaign(props) {
       .catch(error => {
         console.log(error);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.match.params.id]);
 
   const handleChanges = event => {

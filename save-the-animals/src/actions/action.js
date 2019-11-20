@@ -4,6 +4,7 @@ import api from "../utils/api";
 export const FETCH_ORGS = "FETCH_ORGS";
 export const SET_USER_TYPE = "SET_USER_TYPE";
 export const SET_ORGAN_ID = "SET_ORGAN_ID";
+export const SET_CAMPAIGNS = "SET_CAMPAIGNS";
 export const REQUEST_START = "REQUEST_START";
 export const REQUEST_SUCCESS = "REQUEST_SUCCESS";
 export const REQUEST_ERROR = "REQUEST_ERROR";
@@ -52,5 +53,43 @@ export function LogIn(user, userType, history) {
       .catch(err => {
         dispatch({ type: REQUEST_ERROR, payload: err });
       });
+  };
+}
+
+export function getOrgCampaigns() {
+  return dispatch => {
+    // dispatch({ type: REQUEST_START });
+    api()
+      .get("/campaigns/organizations")
+      .then(res => {
+        dispatch({ type: SET_CAMPAIGNS, payload: res.data.campaigns });
+        dispatch({ type: REQUEST_SUCCESS });
+      })
+      .catch(err => {
+        dispatch({ type: REQUEST_ERROR, payload: err });
+      });
+  };
+}
+
+export function getSuppCampaigns() {
+  return dispatch => {
+    // dispatch({ type: REQUEST_START });
+    api()
+      .get("/campaigns/supporters")
+      .then(res => {
+        console.log(res);
+        dispatch({ type: SET_CAMPAIGNS, payload: res.data.campaigns });
+        dispatch({ type: REQUEST_SUCCESS });
+      })
+      .catch(err => {
+        dispatch({ type: REQUEST_ERROR, payload: err });
+      });
+  };
+}
+
+export function setCampaigns(campaign) {
+  return {
+    type: SET_CAMPAIGNS,
+    payload: campaign
   };
 }

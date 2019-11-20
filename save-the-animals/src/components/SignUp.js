@@ -21,6 +21,7 @@ function SignUp(props) {
 
   useEffect(() => {
     props.fetchOrgList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChange = event => {
@@ -30,7 +31,7 @@ function SignUp(props) {
     });
   };
 
-  const setUserType = event => {
+  const setUserType = () => {
     if (user.userType === "organization") {
       props.setUserType("organization");
       localStorage.setItem("user_type", "organization");
