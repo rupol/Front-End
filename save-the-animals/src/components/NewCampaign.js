@@ -9,7 +9,7 @@ function NewCampaign(props) {
     species: "",
     urgency: "",
     image_url: "",
-    organization_id: Number(props.organID)
+    organization_id: Number(localStorage.getItem("organ_id"))
   });
 
   const handleChanges = event => {

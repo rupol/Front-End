@@ -43,6 +43,7 @@ export function LogIn(user, userType, history) {
         localStorage.setItem("token", res.data.token);
         if (userType === "organization") {
           dispatch({ type: SET_ORGAN_ID, payload: res.data.organ_id });
+          localStorage.setItem("organ_id", res.data.organ_id);
           history.push("/org-campaigns");
         } else {
           history.push("/all-campaigns");

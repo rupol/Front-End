@@ -33,13 +33,16 @@ function SignUp(props) {
   const setUserType = event => {
     if (user.userType === "organization") {
       props.setUserType("organization");
+      localStorage.setItem("user_type", "organization");
       props.setOrganID(user.organization_id);
     } else {
       props.setUserType("supporter");
+      localStorage.setItem("user_type", "supporter");
     }
   };
 
   const handleSubmit = event => {
+    // fix bug - organization login returns 403 error
     event.preventDefault();
     setUserType();
     axios

@@ -9,7 +9,6 @@ const OrgCampaign = props => {
       <h3>Species: {props.campaign.species}</h3>
       <h3>Urgency: {props.campaign.urgency}</h3>
       <h3>Funding Recieved: ${props.campaign.funding_received}</h3>
-      <h3>Funding Needed: ${props.campaign.totalFunding_needed}</h3>
       <div className="campaign-buttons">
         <Link
           className="fas fa-edit fa-xlg btn edit-button"

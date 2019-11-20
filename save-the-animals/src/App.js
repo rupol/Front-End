@@ -18,24 +18,26 @@ import loader from "./img/loader.gif";
 
 function App(props) {
   const loggedIn = getToken();
+  const userType = localStorage.getItem("user_type");
 
   return (
     <div className="App">
       <nav>
-        <NavLink className="logo" exact to="/">
-          Save the Animals
-        </NavLink>
+        <a className="logo" href="https://keyconservation.netlify.com/">
+          Key Conservation
+        </a>
         {!loggedIn && (
-          <NavLink exact to="/login">
-            Log In
-          </NavLink>
+          <>
+            <NavLink exact to="/login">
+              Log In
+            </NavLink>
+
+            <NavLink exact to="/signup">
+              Sign Up
+            </NavLink>
+          </>
         )}
-        {!loggedIn && (
-          <NavLink exact to="/signup">
-            Sign Up
-          </NavLink>
-        )}
-        {loggedIn && props.userType === "organization" ? (
+        {loggedIn && userType === "organization" ? (
           <>
             <NavLink exact to="/org-campaigns">
               Campaigns
@@ -44,7 +46,7 @@ function App(props) {
               New Campaign
             </NavLink>
           </>
-        ) : loggedIn && props.userType === "supporter" ? (
+        ) : loggedIn && userType === "supporter" ? (
           <NavLink exact to="/all-campaigns">
             All Campaigns
           </NavLink>
@@ -61,6 +63,7 @@ function App(props) {
         <img src={loader} alt="loading" className="loader" />
       ) : (
         <>
+          <Route exact path="/" component={Login} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
           <ProtectedRoute

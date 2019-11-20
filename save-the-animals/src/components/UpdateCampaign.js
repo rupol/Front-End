@@ -9,13 +9,14 @@ function UpdateCampaign(props) {
     species: "",
     urgency: "",
     image_url: "",
-    organization_id: Number(props.organID)
+    organization_id: Number(localStorage.getItem("organ_id"))
   });
 
   useEffect(() => {
     api()
       .get(`/campaigns/organizations`)
       .then(result => {
+        console.log(result);
         result.data.campaigns.map(camp => {
           camp.campaigns_id === Number(props.match.params.id) &&
             setCampaign({
@@ -27,6 +28,14 @@ function UpdateCampaign(props) {
               image_url: camp.image_url
             });
         });
+        api()
+          .get(`/campaigns/${props.match.params.id}/fundings`)
+          .then(result => {
+            console.log(result.data);
+          })
+          .catch(error => {
+            console.log(error);
+          });
       })
       .catch(error => {
         console.log(error);
@@ -44,7 +53,7 @@ function UpdateCampaign(props) {
     event.preventDefault();
     setCampaign({
       ...campaign,
-      organization_id: Number(props.organID)
+      organization_id: Number(localStorage.getItem("organ_id"))
     });
     api()
       .put(`/campaigns/${props.match.params.id}`, campaign)

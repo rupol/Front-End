@@ -7,6 +7,7 @@ const Campaign = props => {
       <h3>Location: {props.campaign.location}</h3>
       <h3>Species: {props.campaign.species}</h3>
       <h3>Urgency: {props.campaign.urgency}</h3>
+      <h3>Funding Recieved: ${props.campaign.funding_received}</h3>
     </div>
   );
 };
