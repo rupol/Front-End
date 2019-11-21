@@ -63,12 +63,17 @@ function App(props) {
       {props.isLoading ? (
         <img src={loader} alt="loading" className="loader" />
       ) : props.error ? (
-        <>
+        <div className="oops">
           <img src={error} alt="error" className="error-img" />
-          <p className="error">
-            Sorry, something has gone wrong, please try again
-          </p>
-        </>
+          <h2 className="error">
+            <span>
+              Sorry, something has gone wrong
+              <span className="spacer"></span>
+              <br />
+              <span className="spacer"></span> Please try again
+            </span>
+          </h2>
+        </div>
       ) : (
         <>
           <Route exact path="/" component={Login} />

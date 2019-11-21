@@ -43,7 +43,7 @@ function SignUp(props) {
   };
 
   const handleSubmit = event => {
-    // fix bug - organization login returns 403 error
+    // fix bug - organization login returns 403 error - routes to /all-campaigns
     event.preventDefault();
     setUserType();
     axios

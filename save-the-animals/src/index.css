@@ -216,7 +216,7 @@ nav a.active {
 }
 
 .main-section {
-  margin-top: 50px;
+  margin: 50px 0;
 }
 
 .loader {
@@ -224,14 +224,37 @@ nav a.active {
   margin: 50px 1% 6rem;
 }
 
+.oops {
+  position: relative;
+  width: 100%;
+  margin: 100px auto 0;
+  padding: 0 1%;
+}
+
 .error {
-  margin: 50px 1% 6rem;
+  position: absolute;
+  top: 200px;
+  left: 0;
+  width: 100%;
+  text-align: left;
+}
+
+.error span {
+  color: white;
+  font-size: 3rem;
+  line-height: 7rem;
+  letter-spacing: -1px;
+  background: rgb(0, 0, 0); /* fallback color */
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+}
+
+.error span.spacer {
+  padding: 0 5px;
 }
 
 .error-img {
   max-width: 100%;
-  margin: 100px auto 0;
-  padding: 0 1%;
 }
 
 form {
@@ -398,7 +421,7 @@ label {
 
 @media (max-width: 700px) {
   h1 {
-    font-size: 5rem;
+    font-size: 4.5rem;
   }
 
   h2 {
@@ -407,5 +430,43 @@ label {
 
   nav a {
     width: 100%;
+    font-size: 1.5rem;
+    padding: 15px 0;
+  }
+
+  .main-section {
+    margin: 25px 0 50px;
+  }
+
+  label {
+    font-size: 1.25rem;
+  }
+
+  input,
+  select {
+    height: 4rem;
+    padding: 0 0.5rem;
+    font-size: 1.75rem;
+  }
+
+  .btn {
+    height: 40px;
+    width: 100%;
+    font-size: 2rem;
+    margin: 1rem 0 0;
+  }
+
+  .campaign-buttons .btn {
+    border: none;
+    padding: 15px 16px;
+  }
+
+  .error {
+    top: 70px;
+  }
+
+  .error span {
+    font-size: 2rem;
+    line-height: 6rem;
   }
 }
