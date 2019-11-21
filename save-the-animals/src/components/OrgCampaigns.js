@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-import api from "../utils/api";
 
 import OrgCampaign from "./OrgCampaign";
 
-import { getOrgCampaigns } from "../actions/action";
+import { getOrgCampaigns, deleteCampaign } from "../actions/action";
 
 function OrgCampaigns(props) {
   useEffect(() => {
@@ -15,14 +14,7 @@ function OrgCampaigns(props) {
 
   const handleDelete = event => {
     event.preventDefault();
-    api()
-      .delete(`/campaigns/${event.target.value}`)
-      .then(res => {
-        props.getOrgCampaigns();
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    props.deleteCampaign(event.target.value);
   };
 
   return (
@@ -55,4 +47,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getOrgCampaigns })(OrgCampaigns);
+export default connect(mapStateToProps, { getOrgCampaigns, deleteCampaign })(
+  OrgCampaigns
+);

@@ -93,3 +93,48 @@ export function setCampaigns(campaign) {
     payload: campaign
   };
 }
+
+export function deleteCampaign(campaignID) {
+  return dispatch => {
+    dispatch({ type: REQUEST_START });
+    api()
+      .delete(`/campaigns/${campaignID}`)
+      .then(res => {
+        dispatch({ type: REQUEST_SUCCESS });
+        getOrgCampaigns();
+      })
+      .catch(err => {
+        dispatch({ type: REQUEST_ERROR, payload: err });
+      });
+  };
+}
+
+export function createCampaign(campaign, history) {
+  return dispatch => {
+    dispatch({ type: REQUEST_START });
+    api()
+      .post("/campaigns", campaign)
+      .then(res => {
+        dispatch({ type: REQUEST_SUCCESS });
+        history.push("/org-campaigns");
+      })
+      .catch(err => {
+        dispatch({ type: REQUEST_ERROR, payload: err });
+      });
+  };
+}
+
+export function updateCampaign(campaign, campaignID, history) {
+  return dispatch => {
+    dispatch({ type: REQUEST_START });
+    api()
+      .put(`/campaigns/${campaignID}`, campaign)
+      .then(res => {
+        dispatch({ type: REQUEST_SUCCESS });
+        history.push("/org-campaigns");
+      })
+      .catch(err => {
+        dispatch({ type: REQUEST_ERROR, payload: err });
+      });
+  };
+}

@@ -15,6 +15,7 @@ import UpdateCampaign from "./components/UpdateCampaign";
 import AllCampaigns from "./components/AllCampaigns";
 
 import loader from "./img/loader.gif";
+import error from "./img/error.jpg";
 
 function App(props) {
   const loggedIn = getToken();
@@ -61,6 +62,13 @@ function App(props) {
       </nav>
       {props.isLoading ? (
         <img src={loader} alt="loading" className="loader" />
+      ) : props.error ? (
+        <>
+          <img src={error} alt="error" className="error-img" />
+          <p className="error">
+            Sorry, something has gone wrong, please try again
+          </p>
+        </>
       ) : (
         <>
           <Route exact path="/" component={Login} />
@@ -92,7 +100,8 @@ function App(props) {
 const mapStateToProps = state => {
   return {
     userType: state.userType,
-    isLoading: state.isLoading
+    isLoading: state.isLoading,
+    error: state.error
   };
 };
 

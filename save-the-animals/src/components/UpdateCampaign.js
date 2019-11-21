@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import api from "../utils/api";
 import { connect } from "react-redux";
+
+import { updateCampaign, getOrgCampaigns } from "../actions/action";
 
 function UpdateCampaign(props) {
   const [campaign, setCampaign] = useState({
@@ -13,33 +14,18 @@ function UpdateCampaign(props) {
   });
 
   useEffect(() => {
-    api()
-      .get(`/campaigns/organizations`)
-      .then(result => {
-        console.log(result);
-        result.data.campaigns.map(camp => {
-          camp.campaigns_id === Number(props.match.params.id) &&
-            setCampaign({
-              ...campaign,
-              title: camp.title,
-              location: camp.location,
-              species: camp.species,
-              urgency: camp.urgency,
-              image_url: camp.image_url
-            });
+    props.getOrgCampaigns();
+    props.campaigns.map(camp => {
+      camp.campaigns_id === Number(props.match.params.id) &&
+        setCampaign({
+          ...campaign,
+          title: camp.title,
+          location: camp.location,
+          species: camp.species,
+          urgency: camp.urgency,
+          image_url: camp.image_url
         });
-        api()
-          .get(`/campaigns/${props.match.params.id}/fundings`)
-          .then(result => {
-            console.log(result.data);
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.match.params.id]);
 
@@ -56,14 +42,7 @@ function UpdateCampaign(props) {
       ...campaign,
       organization_id: Number(localStorage.getItem("organ_id"))
     });
-    api()
-      .put(`/campaigns/${props.match.params.id}`, campaign)
-      .then(res => {
-        props.history.push("/org-campaigns");
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    props.updateCampaign(campaign, props.match.params.id, props.history);
   };
 
   return (
@@ -118,8 +97,11 @@ function UpdateCampaign(props) {
 
 const mapStateToProps = state => {
   return {
-    organID: state.organID
+    organID: state.organID,
+    campaigns: state.campaigns
   };
 };
 
-export default connect(mapStateToProps, {})(UpdateCampaign);
+export default connect(mapStateToProps, { updateCampaign, getOrgCampaigns })(
+  UpdateCampaign
+);

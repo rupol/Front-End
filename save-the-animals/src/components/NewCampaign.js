@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import api from "../utils/api";
 import { connect } from "react-redux";
+
+import { createCampaign } from "../actions/action";
 
 function NewCampaign(props) {
   const [newCampaign, setNewCampaign] = useState({
@@ -21,14 +22,7 @@ function NewCampaign(props) {
 
   const handleSubmit = event => {
     event.preventDefault();
-    api()
-      .post("/campaigns", newCampaign)
-      .then(res => {
-        props.history.push("/org-campaigns");
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    props.createCampaign(newCampaign, props.history);
   };
 
   return (
@@ -92,4 +86,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {})(NewCampaign);
+export default connect(mapStateToProps, { createCampaign })(NewCampaign);
