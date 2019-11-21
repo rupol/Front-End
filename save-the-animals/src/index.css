@@ -461,6 +461,13 @@ label {
     padding: 15px 16px;
   }
 
+  .clear-button {
+    height: 50px;
+    width: 50px;
+    margin: 0;
+    padding: 0 18px;
+  }
+
   .error {
     top: 70px;
   }
