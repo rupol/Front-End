@@ -36,6 +36,13 @@ function UpdateCampaign(props) {
     });
   };
 
+  const handleDelete = event => {
+    event.preventDefault();
+    window.confirm(
+      "Are you sure you want to delete this campaign? This action cannot be undone"
+    ) && props.deleteCampaign(event.target.value);
+  };
+
   const handleSubmit = event => {
     event.preventDefault();
     setCampaign({
@@ -49,7 +56,7 @@ function UpdateCampaign(props) {
     <div className="main-section">
       <h1>Update A Campaign</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="formTitle">Campaign Title</label>
+        <label htmlFor="formTitle">Title</label>
         <input
           type="text"
           id="formTitle"
@@ -89,6 +96,13 @@ function UpdateCampaign(props) {
         />
         <button className="btn" type="submit">
           Update
+        </button>
+        <button
+          onClick={handleDelete}
+          value={campaign.campaigns_id}
+          className="btn delete-button"
+        >
+          Delete
         </button>
       </form>
     </div>

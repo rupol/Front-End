@@ -198,11 +198,15 @@ nav {
 }
 
 nav a {
-  text-decoration: none;
-  color          : #000000;
-  font-size      : 1.75rem;
-  text-transform : uppercase;
-  padding        : 25px 20px;
+  text-decoration   : none;
+  color             : #000000;
+  font-size         : 1.75rem;
+  text-transform    : uppercase;
+  padding           : 25px 20px;
+  -webkit-transition: all 0.15s ease-out 0s;
+  -moz-transition   : all 0.15s ease-out 0s;
+  -o-transition     : all 0.15s ease-out 0s;
+  transition        : all 0.15s ease-out 0s;
 }
 
 nav a:hover {
@@ -308,6 +312,10 @@ label {
   letter-spacing         : 0.5rem;
   font-size              : 2.5rem;
   margin                 : 2rem;
+  -webkit-transition     : all 0.15s ease-out 0s;
+  -moz-transition        : all 0.15s ease-out 0s;
+  -o-transition          : all 0.15s ease-out 0s;
+  transition             : all 0.15s ease-out 0s;
 }
 
 .btn:hover {
@@ -334,19 +342,21 @@ label {
   text-align             : center;
   -webkit-text-decoration: none;
   text-decoration        : none;
-  border                 : none;
   color                  : #000;
+  border                 : 3px #ffffff solid;
   margin                 : 2rem;
-  padding                : 10px 14px;
+  padding                : 10px 11px;
 }
 
 .delete-button {
   background-color: #e6673e;
+
 }
 
 .delete-button:hover {
   background-color: #ffffff;
   color           : #e6673e;
+  border          : 3px #e6673e solid;
 }
 
 .edit-button {
@@ -356,6 +366,7 @@ label {
 .edit-button:hover {
   background-color: #ffffff;
   color           : #e7cf5e;
+  border          : 3px #e7cf5e solid;
 }
 
 .search-bar {

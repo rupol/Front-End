@@ -14,7 +14,9 @@ function OrgCampaigns(props) {
 
   const handleDelete = event => {
     event.preventDefault();
-    props.deleteCampaign(event.target.value);
+    window.confirm(
+      "Are you sure you want to delete this campaign? This action cannot be undone"
+    ) && props.deleteCampaign(event.target.value);
   };
 
   return (
