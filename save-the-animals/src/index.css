@@ -84,11 +84,11 @@ time,
 mark,
 audio,
 video {
-  margin        : 0;
-  padding       : 0;
-  border        : 0;
-  font-size     : 100%;
-  font          : inherit;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
   vertical-align: baseline;
 }
 
@@ -131,7 +131,7 @@ q:after {
 
 table {
   border-collapse: collapse;
-  border-spacing : 0;
+  border-spacing: 0;
 }
 
 * {
@@ -139,8 +139,8 @@ table {
 }
 
 html {
-  font-size  : 62.5%;
-  text-align : center;
+  font-size: 62.5%;
+  text-align: center;
   font-family: "Open Sans", sans-serif;
 }
 
@@ -153,25 +153,25 @@ html {
 #e7cf5e */
 
 h1 {
-  font-size     : 6rem;
-  margin        : 1rem 1% 2rem;
+  font-size: 6rem;
+  margin: 1rem 1% 2rem;
   text-transform: uppercase;
-  font-weight   : 700;
+  font-weight: 700;
 }
 
 h2 {
   font-size: 4rem;
-  margin   : 1rem 1% 2rem;
+  margin: 1rem 1% 2rem;
 }
 
 h3 {
   font-size: 2rem;
-  margin   : 1rem 1%;
+  margin: 1rem 1%;
 }
 
 p {
   font-size: 2rem;
-  margin   : 1rem 1%;
+  margin: 1rem 1%;
 }
 
 a {
@@ -183,14 +183,12 @@ a:hover {
 }
 
 nav {
-  width           : 100%;
-  height          : 80px;
-  z-index         : 5;
+  width: 100%;
   background-color: #ffffff;
-  display         : flex;
-  flex-flow       : row wrap;
-  justify-content : space-evenly;
-  align-items     : flex-end;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-items: flex-end;
 }
 
 .logo {
@@ -198,15 +196,15 @@ nav {
 }
 
 nav a {
-  text-decoration   : none;
-  color             : #000000;
-  font-size         : 1.75rem;
-  text-transform    : uppercase;
-  padding           : 25px 20px;
+  text-decoration: none;
+  color: #000000;
+  font-size: 1.75rem;
+  text-transform: uppercase;
+  padding: 25px 20px;
   -webkit-transition: all 0.15s ease-out 0s;
-  -moz-transition   : all 0.15s ease-out 0s;
-  -o-transition     : all 0.15s ease-out 0s;
-  transition        : all 0.15s ease-out 0s;
+  -moz-transition: all 0.15s ease-out 0s;
+  -o-transition: all 0.15s ease-out 0s;
+  transition: all 0.15s ease-out 0s;
 }
 
 nav a:hover {
@@ -223,34 +221,33 @@ nav a.active {
 
 .loader {
   max-width: 100%;
-  margin   : 50px 1% 6rem;
+  margin: 50px 1% 6rem;
 }
 
 .error {
   margin: 50px 1% 6rem;
-
 }
 
 .error-img {
   max-width: 100%;
-  margin   : 100px auto 0;
-  padding  : 0 1%;
+  margin: 100px auto 0;
+  padding: 0 1%;
 }
 
 form {
   max-width: 500px;
-  margin   : 0 auto;
-  padding  : 2rem;
-  border   : none;
+  margin: 0 auto;
+  padding: 2rem;
+  border: none;
 }
 
 input,
 select {
-  width    : 100%;
-  height   : 5rem;
-  border   : 2px #d0d0d0 solid;
-  outline  : none;
-  padding  : 0 2rem;
+  width: 100%;
+  height: 5rem;
+  border: 2px #d0d0d0 solid;
+  outline: none;
+  padding: 0 2rem;
   font-size: 2rem;
 
   margin: 0.5rem auto 1.5rem;
@@ -261,13 +258,13 @@ input::placeholder {
 }
 
 label {
-  color         : #5d5d5d;
-  font-size     : 1.5rem;
-  margin        : 1rem 0 0;
-  text-align    : left;
-  display       : block;
+  color: #5d5d5d;
+  font-size: 1.5rem;
+  margin: 1rem 0 0;
+  text-align: left;
+  display: block;
   text-transform: uppercase;
-  font-weight   : 600;
+  font-weight: 600;
   letter-spacing: 0.5rem;
 }
 
@@ -276,17 +273,17 @@ label {
 }
 
 .user-input {
-  display        : flex;
-  flex-flow      : row nowrap;
+  display: flex;
+  flex-flow: row nowrap;
   justify-content: space-between;
-  width          : 250px;
-  align-items    : center;
-  margin         : 1rem auto;
+  width: 250px;
+  align-items: center;
+  margin: 1rem auto;
 }
 
 .user-type-inputs input {
   height: 2rem;
-  width : 2rem;
+  width: 2rem;
   margin: 0;
 }
 
@@ -299,23 +296,23 @@ label {
 }
 
 .btn {
-  height                 : 50px;
-  width                  : 70%;
-  text-align             : center;
+  height: 50px;
+  width: 70%;
+  text-align: center;
   -webkit-text-decoration: none;
-  text-decoration        : none;
-  border                 : none;
-  color                  : #2a2a2a;
-  background-color       : #00ff9d;
-  font-weight            : 600;
-  text-transform         : uppercase;
-  letter-spacing         : 0.5rem;
-  font-size              : 2.5rem;
-  margin                 : 2rem;
-  -webkit-transition     : all 0.15s ease-out 0s;
-  -moz-transition        : all 0.15s ease-out 0s;
-  -o-transition          : all 0.15s ease-out 0s;
-  transition             : all 0.15s ease-out 0s;
+  text-decoration: none;
+  border: none;
+  color: #2a2a2a;
+  background-color: #00ff9d;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
+  font-size: 2.5rem;
+  margin: 2rem;
+  -webkit-transition: all 0.15s ease-out 0s;
+  -moz-transition: all 0.15s ease-out 0s;
+  -o-transition: all 0.15s ease-out 0s;
+  transition: all 0.15s ease-out 0s;
 }
 
 .btn:hover {
@@ -324,39 +321,38 @@ label {
 
 .campaign-card {
   max-width: 500px;
-  margin   : 3rem auto;
-  padding  : 2rem;
-  border   : none;
+  margin: 3rem auto;
+  padding: 2rem;
+  border: none;
 }
 
 .campaign-buttons {
-  display        : flex;
-  flex-wrap      : nowrap;
-  align-items    : center;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
   justify-content: center;
 }
 
 .campaign-buttons .btn {
-  height                 : 50px;
-  width                  : 50px;
-  text-align             : center;
+  height: 50px;
+  width: 50px;
+  text-align: center;
   -webkit-text-decoration: none;
-  text-decoration        : none;
-  color                  : #000;
-  border                 : 3px #ffffff solid;
-  margin                 : 2rem;
-  padding                : 10px 11px;
+  text-decoration: none;
+  color: #000;
+  border: 3px #ffffff solid;
+  margin: 2rem;
+  padding: 10px 11px;
 }
 
 .delete-button {
   background-color: #e6673e;
-
 }
 
 .delete-button:hover {
   background-color: #ffffff;
-  color           : #e6673e;
-  border          : 3px #e6673e solid;
+  color: #e6673e;
+  border: 3px #e6673e solid;
 }
 
 .edit-button {
@@ -365,8 +361,8 @@ label {
 
 .edit-button:hover {
   background-color: #ffffff;
-  color           : #e7cf5e;
-  border          : 3px #e7cf5e solid;
+  color: #e7cf5e;
+  border: 3px #e7cf5e solid;
 }
 
 .search-bar {
@@ -374,16 +370,16 @@ label {
 }
 
 .search-flex {
-  display        : flex;
-  flex-wrap      : nowrap;
-  align-items    : center;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
   justify-content: center;
-  margin         : 1rem 0;
-  border         : 2px #d0d0d0 solid;
+  margin: 1rem 0;
+  border: 2px #d0d0d0 solid;
 }
 
 .search-type {
-  width : 150px;
+  width: 150px;
   border: none;
   margin: 0;
 }
@@ -394,8 +390,22 @@ label {
 }
 
 .clear-button {
-  height : 50px;
-  width  : 50px;
+  height: 50px;
+  width: 50px;
   padding: 0 16px;
-  margin : 0;
+  margin: 0;
+}
+
+@media (max-width: 700px) {
+  h1 {
+    font-size: 5rem;
+  }
+
+  h2 {
+    font-size: 3.5rem;
+  }
+
+  nav a {
+    width: 100%;
+  }
 }
