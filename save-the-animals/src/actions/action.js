@@ -105,7 +105,6 @@ export function getSuppCampaigns() {
     api()
       .get("/campaigns/supporters")
       .then(res => {
-        console.log(res);
         dispatch({ type: SET_CAMPAIGNS, payload: res.data.campaigns });
         dispatch({ type: REQUEST_SUCCESS });
       })

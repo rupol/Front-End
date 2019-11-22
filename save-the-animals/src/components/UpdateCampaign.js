@@ -9,7 +9,6 @@ import {
 
 function UpdateCampaign(props) {
   const [campaign, setCampaign] = useState({
-    campaigns_id: null,
     title: "",
     location: "",
     species: "",
@@ -24,7 +23,6 @@ function UpdateCampaign(props) {
       camp.campaigns_id === Number(props.match.params.id) &&
         setCampaign({
           ...campaign,
-          campaigns_id: camp.campaigns_id,
           title: camp.title,
           location: camp.location,
           species: camp.species,
@@ -46,7 +44,7 @@ function UpdateCampaign(props) {
     event.preventDefault();
     window.confirm(
       "Are you sure you want to delete this campaign? This action cannot be undone"
-    ) && props.deleteCampaign(event.target.value);
+    ) && props.deleteCampaign(props.match.params.id);
     props.history.push("/org-campaigns");
   };
 
