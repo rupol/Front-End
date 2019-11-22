@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-import { updateCampaign, getOrgCampaigns } from "../actions/action";
+import {
+  updateCampaign,
+  getOrgCampaigns,
+  deleteCampaign
+} from "../actions/action";
 
 function UpdateCampaign(props) {
   const [campaign, setCampaign] = useState({
+    campaigns_id: null,
     title: "",
     location: "",
     species: "",
@@ -19,6 +24,7 @@ function UpdateCampaign(props) {
       camp.campaigns_id === Number(props.match.params.id) &&
         setCampaign({
           ...campaign,
+          campaigns_id: camp.campaigns_id,
           title: camp.title,
           location: camp.location,
           species: camp.species,
@@ -41,6 +47,7 @@ function UpdateCampaign(props) {
     window.confirm(
       "Are you sure you want to delete this campaign? This action cannot be undone"
     ) && props.deleteCampaign(event.target.value);
+    props.history.push("/org-campaigns");
   };
 
   const handleSubmit = event => {
@@ -116,6 +123,8 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { updateCampaign, getOrgCampaigns })(
-  UpdateCampaign
-);
+export default connect(mapStateToProps, {
+  updateCampaign,
+  getOrgCampaigns,
+  deleteCampaign
+})(UpdateCampaign);

@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
 import { connect } from "react-redux";
 import {
   fetchOrgList,
   setUserType,
   setOrganID,
-  LogIn
+  signUp
 } from "../actions/action";
 
 function SignUp(props) {
@@ -48,12 +47,7 @@ function SignUp(props) {
   const handleSubmit = event => {
     event.preventDefault();
     props.setOrganID(Number(user.organization_id));
-    axios
-      .post("https://saving-the-animals.herokuapp.com/api/auth/register", user)
-      .then(res => {
-        props.LogIn(user, props.userType, props.history);
-      })
-      .catch(err => console.log(err));
+    props.signUp(user, props.userType, props.history);
   };
 
   return (
@@ -148,5 +142,5 @@ export default connect(mapStateToProps, {
   fetchOrgList,
   setUserType,
   setOrganID,
-  LogIn
+  signUp
 })(SignUp);

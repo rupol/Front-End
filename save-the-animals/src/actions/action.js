@@ -1,4 +1,3 @@
-import axios from "axios";
 import api from "../utils/api";
 
 export const FETCH_ORGS = "FETCH_ORGS";
@@ -11,8 +10,8 @@ export const REQUEST_ERROR = "REQUEST_ERROR";
 
 export function fetchOrgList() {
   return dispatch => {
-    axios
-      .get("https://saving-the-animals.herokuapp.com/api/organizations")
+    api()
+      .get("/organizations")
       .then(res => {
         dispatch({ type: FETCH_ORGS, payload: res.data });
       })
@@ -49,6 +48,35 @@ export function LogIn(user, userType, history) {
         } else {
           history.push("/all-campaigns");
         }
+      })
+      .catch(err => {
+        dispatch({ type: REQUEST_ERROR, payload: err });
+      });
+  };
+}
+
+export function signUp(user, userType, history) {
+  return dispatch => {
+    dispatch({ type: REQUEST_START });
+    api()
+      .post("/auth/register", user)
+      .then(res => {
+        api()
+          .post("/auth/login", user)
+          .then(res => {
+            dispatch({ type: REQUEST_SUCCESS });
+            localStorage.setItem("token", res.data.token);
+            if (userType === "organization") {
+              dispatch({ type: SET_ORGAN_ID, payload: res.data.organ_id });
+              localStorage.setItem("organ_id", res.data.organ_id);
+              history.push("/org-campaigns");
+            } else {
+              history.push("/all-campaigns");
+            }
+          })
+          .catch(err => {
+            dispatch({ type: REQUEST_ERROR, payload: err });
+          });
       })
       .catch(err => {
         dispatch({ type: REQUEST_ERROR, payload: err });
