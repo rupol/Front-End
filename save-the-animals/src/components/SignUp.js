@@ -16,7 +16,7 @@ function SignUp(props) {
     email: "",
     password: "",
     userType: "",
-    organization_id: null
+    organization_id: 1
   });
 
   useEffect(() => {
@@ -31,11 +31,14 @@ function SignUp(props) {
     });
   };
 
-  const setUserType = () => {
-    if (user.userType === "organization") {
+  const setUserType = event => {
+    setUser({
+      ...user,
+      [event.target.name]: event.target.value
+    });
+    if (event.target.value === "organization") {
       props.setUserType("organization");
       localStorage.setItem("user_type", "organization");
-      props.setOrganID(user.organization_id);
     } else {
       props.setUserType("supporter");
       localStorage.setItem("user_type", "supporter");
@@ -43,13 +46,11 @@ function SignUp(props) {
   };
 
   const handleSubmit = event => {
-    // fix bug - organization login returns 403 error - routes to /all-campaigns
     event.preventDefault();
-    setUserType();
+    props.setOrganID(Number(user.organization_id));
     axios
       .post("https://saving-the-animals.herokuapp.com/api/auth/register", user)
       .then(res => {
-        console.log(res);
         props.LogIn(user, props.userType, props.history);
       })
       .catch(err => console.log(err));
@@ -95,7 +96,7 @@ function SignUp(props) {
               name="userType"
               id="organization"
               value="organization"
-              onChange={handleChange}
+              onChange={setUserType}
               required
             />
           </div>
@@ -106,7 +107,7 @@ function SignUp(props) {
               name="userType"
               id="supporter"
               value="support"
-              onChange={handleChange}
+              onChange={setUserType}
               required
             />
           </div>
@@ -117,16 +118,8 @@ function SignUp(props) {
               Select your organization: <br />
             </label>
             <select name="organization_id" onChange={handleChange}>
-              <option disabled onChange={handleChange}>
-                Select your organization:
-              </option>
               {props.orgList.map(org => (
-                <option
-                  required
-                  key={org.id}
-                  value={org.id}
-                  onChange={handleChange}
-                >
+                <option required key={org.id} value={org.id}>
                   {org.organ_name}
                 </option>
               ))}

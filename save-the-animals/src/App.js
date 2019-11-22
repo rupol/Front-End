@@ -76,7 +76,13 @@ function App(props) {
         </div>
       ) : (
         <>
-          <Route exact path="/" component={Login} />
+          {loggedIn && userType === "organization" ? (
+            <Route exact path="/" component={OrgCampaigns} />
+          ) : loggedIn && userType === "supporter" ? (
+            <Route exact path="/" component={AllCampaigns} />
+          ) : (
+            <Route exact path="/" component={Login} />
+          )}
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
           <ProtectedRoute
