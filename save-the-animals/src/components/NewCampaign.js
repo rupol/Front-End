@@ -71,6 +71,15 @@ function NewCampaign(props) {
           onChange={handleChanges}
           required
         />
+        <label htmlFor="formImage">Image URL</label>
+        <input
+          type="text"
+          id="formImage"
+          name="image_url"
+          placeholder="Image Url"
+          value={newCampaign.image_url}
+          onChange={handleChanges}
+        />
         <button className="btn" type="submit">
           Add
         </button>

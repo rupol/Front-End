@@ -99,6 +99,15 @@ function UpdateCampaign(props) {
           value={campaign.urgency}
           onChange={handleChanges}
         />
+        <label htmlFor="formImage">Image URL</label>
+        <input
+          type="text"
+          id="formImage"
+          name="image_url"
+          placeholder="Image Url"
+          value={campaign.image_url}
+          onChange={handleChanges}
+        />
         <button className="btn" type="submit">
           Update
         </button>
