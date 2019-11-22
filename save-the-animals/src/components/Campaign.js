@@ -24,7 +24,9 @@ const Campaign = props => {
       />
       <div className="campaign-info">
         <h2>{props.campaign.title}</h2>
-        <h3>Organization: {orgSwitch(props.campaign.organization_id)}</h3>
+        <h3 className="org-name">
+          {orgSwitch(props.campaign.organization_id)}
+        </h3>
         <h3>Location: {props.campaign.location}</h3>
         <h3>Species: {props.campaign.species}</h3>
         <h3>Urgency: {props.campaign.urgency}</h3>
