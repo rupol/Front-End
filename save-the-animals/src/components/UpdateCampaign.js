@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
-import api from "../utils/api";
 import { connect } from "react-redux";
+
+import {
+  updateCampaign,
+  getOrgCampaigns,
+  deleteCampaign
+} from "../actions/action";
 
 function UpdateCampaign(props) {
   const [campaign, setCampaign] = useState({
@@ -9,28 +14,23 @@ function UpdateCampaign(props) {
     species: "",
     urgency: "",
     image_url: "",
-    organization_id: Number(props.organID)
+    organization_id: Number(localStorage.getItem("organ_id"))
   });
 
   useEffect(() => {
-    api()
-      .get(`/campaigns/organizations`)
-      .then(result => {
-        result.data.campaigns.map(camp => {
-          camp.campaigns_id === Number(props.match.params.id) &&
-            setCampaign({
-              ...campaign,
-              title: camp.title,
-              location: camp.location,
-              species: camp.species,
-              urgency: camp.urgency,
-              image_url: camp.image_url
-            });
+    props.getOrgCampaigns();
+    props.campaigns.map(camp => {
+      camp.campaigns_id === Number(props.match.params.id) &&
+        setCampaign({
+          ...campaign,
+          title: camp.title,
+          location: camp.location,
+          species: camp.species,
+          urgency: camp.urgency,
+          image_url: camp.image_url
         });
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.match.params.id]);
 
   const handleChanges = event => {
@@ -40,27 +40,28 @@ function UpdateCampaign(props) {
     });
   };
 
+  const handleDelete = event => {
+    event.preventDefault();
+    window.confirm(
+      "Are you sure you want to delete this campaign? This action cannot be undone"
+    ) && props.deleteCampaign(props.match.params.id);
+    props.history.push("/org-campaigns");
+  };
+
   const handleSubmit = event => {
     event.preventDefault();
     setCampaign({
       ...campaign,
-      organization_id: Number(props.organID)
+      organization_id: Number(localStorage.getItem("organ_id"))
     });
-    api()
-      .put(`/campaigns/${props.match.params.id}`, campaign)
-      .then(res => {
-        props.history.push("/org-campaigns");
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    props.updateCampaign(campaign, props.match.params.id, props.history);
   };
 
   return (
     <div className="main-section">
       <h1>Update A Campaign</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="formTitle">Campaign Title</label>
+        <label htmlFor="formTitle">Title</label>
         <input
           type="text"
           id="formTitle"
@@ -98,8 +99,24 @@ function UpdateCampaign(props) {
           value={campaign.urgency}
           onChange={handleChanges}
         />
+        <label htmlFor="formImage">Image URL</label>
+        <input
+          type="text"
+          id="formImage"
+          name="image_url"
+          placeholder="Image Url"
+          value={campaign.image_url}
+          onChange={handleChanges}
+        />
         <button className="btn" type="submit">
           Update
+        </button>
+        <button
+          onClick={handleDelete}
+          value={campaign.campaigns_id}
+          className="btn delete-button"
+        >
+          Delete
         </button>
       </form>
     </div>
@@ -108,8 +125,13 @@ function UpdateCampaign(props) {
 
 const mapStateToProps = state => {
   return {
-    organID: state.organID
+    organID: state.organID,
+    campaigns: state.campaigns
   };
 };
 
-export default connect(mapStateToProps, {})(UpdateCampaign);
+export default connect(mapStateToProps, {
+  updateCampaign,
+  getOrgCampaigns,
+  deleteCampaign
+})(UpdateCampaign);

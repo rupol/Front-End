@@ -2,6 +2,7 @@ import {
   FETCH_ORGS,
   SET_USER_TYPE,
   SET_ORGAN_ID,
+  SET_CAMPAIGNS,
   REQUEST_START,
   REQUEST_SUCCESS,
   REQUEST_ERROR
@@ -11,6 +12,7 @@ const initialState = {
   orgList: [],
   userType: "",
   organID: null,
+  campaigns: [],
   isLoading: false,
   error: null
 };
@@ -49,6 +51,11 @@ export function reducer(state = initialState, action) {
       return {
         ...state,
         organID: action.payload
+      };
+    case SET_CAMPAIGNS:
+      return {
+        ...state,
+        campaigns: action.payload
       };
     default:
       return state;

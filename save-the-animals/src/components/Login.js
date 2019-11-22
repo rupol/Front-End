@@ -20,8 +20,10 @@ function Login(props) {
   const setUserType = event => {
     if (event.target.value === "organization") {
       props.setUserType("organization");
+      localStorage.setItem("user_type", "organization");
     } else {
       props.setUserType("supporter");
+      localStorage.setItem("user_type", "supporter");
     }
   };
 

@@ -1,6 +1,6 @@
 {
-  "short_name": "Save the Animals",
-  "name": "Save the Animals",
+  "short_name": "Key Conservation",
+  "name": "Key Conservation",
   "icons": [
     {
       "src": "favicon.ico",
@@ -15,6 +15,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#00ff9d",
   "background_color": "#ffffff"
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import api from "../utils/api";
 import { connect } from "react-redux";
+
+import { createCampaign } from "../actions/action";
 
 function NewCampaign(props) {
   const [newCampaign, setNewCampaign] = useState({
@@ -9,7 +10,7 @@ function NewCampaign(props) {
     species: "",
     urgency: "",
     image_url: "",
-    organization_id: Number(props.organID)
+    organization_id: Number(localStorage.getItem("organ_id"))
   });
 
   const handleChanges = event => {
@@ -21,14 +22,7 @@ function NewCampaign(props) {
 
   const handleSubmit = event => {
     event.preventDefault();
-    api()
-      .post("/campaigns", newCampaign)
-      .then(res => {
-        props.history.push("/org-campaigns");
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    props.createCampaign(newCampaign, props.history);
   };
 
   return (
@@ -77,6 +71,15 @@ function NewCampaign(props) {
           onChange={handleChanges}
           required
         />
+        <label htmlFor="formImage">Image URL</label>
+        <input
+          type="text"
+          id="formImage"
+          name="image_url"
+          placeholder="Image Url"
+          value={newCampaign.image_url}
+          onChange={handleChanges}
+        />
         <button className="btn" type="submit">
           Add
         </button>
@@ -92,4 +95,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {})(NewCampaign);
+export default connect(mapStateToProps, { createCampaign })(NewCampaign);

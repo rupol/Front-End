@@ -1,53 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-import api from "../utils/api";
 
 import OrgCampaign from "./OrgCampaign";
 
-function OrgCampaigns(props) {
-  const [campaigns, setCampaigns] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+import { getOrgCampaigns, deleteCampaign } from "../actions/action";
 
+function OrgCampaigns(props) {
   useEffect(() => {
-    setIsLoading(true);
-    api()
-      .get("/campaigns/organizations")
-      .then(res => {
-        setCampaigns(res.data.campaigns);
-        setIsLoading(false);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    props.getOrgCampaigns();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleDelete = event => {
     event.preventDefault();
-    setIsLoading(true);
-    api()
-      .delete(`/campaigns/${event.target.value}`)
-      .then(res => {
-        api()
-          .get("/campaigns/organizations")
-          .then(res => {
-            setCampaigns(res.data.campaigns);
-            setIsLoading(false);
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    window.confirm(
+      "Are you sure you want to delete this campaign? This action cannot be undone"
+    ) && props.deleteCampaign(event.target.value);
   };
 
   return (
     <div className="main-section">
       <h1>My Campaigns</h1>
-      {!isLoading && campaigns.length ? (
+      {props.campaigns.length ? (
         <div>
-          {campaigns.map(campaign => (
+          {props.campaigns.map(campaign => (
             <OrgCampaign
               key={campaign.campaigns_id}
               campaign={campaign}
@@ -55,19 +32,23 @@ function OrgCampaigns(props) {
             />
           ))}
         </div>
-      ) : !isLoading && !campaigns.length ? (
+      ) : (
         <h2>
           <NavLink exact to="/new-campaign">
             Add a campaign
           </NavLink>{" "}
         </h2>
-      ) : (
-        <div>
-          <h2>...loading campaigns...</h2>
-        </div>
       )}
     </div>
   );
 }
 
-export default OrgCampaigns;
+const mapStateToProps = state => {
+  return {
+    campaigns: state.campaigns
+  };
+};
+
+export default connect(mapStateToProps, { getOrgCampaigns, deleteCampaign })(
+  OrgCampaigns
+);
