@@ -1,8 +1,6 @@
-# Water My Plants App
+# Save the Animals App
 
-> Water My Plants helps users create a watering schedule to ensure all their plants are healthy and happy.
-
-Building a schedule around ensuring that all your plants are watered is actually pretty difficult. Water my Plants helps to solve those problems by providing and easy to use interface for creating a plant watering schedule that will remind users to water their plants on a regular basis.
+> Save the Animals connects conservation supporters with the causes they care most about.
 
 This is an app designed during a Lambda School build week.
 
