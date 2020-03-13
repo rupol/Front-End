@@ -134,7 +134,7 @@ function SignUp(props) {
 const mapStateToProps = state => {
   return {
     orgList: state.orgList,
-    userType: state.user_type
+    userType: state.userType
   };
 };
 

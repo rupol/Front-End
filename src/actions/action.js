@@ -67,8 +67,8 @@ export function signUp(user, userType, history) {
             dispatch({ type: REQUEST_SUCCESS });
             localStorage.setItem("token", res.data.token);
             if (userType === "organization") {
-              dispatch({ type: SET_ORGAN_ID, payload: res.data.org_id });
-              localStorage.setItem("organ_id", res.data.org_id);
+              dispatch({ type: SET_ORGAN_ID, payload: res.data.user.org_id });
+              localStorage.setItem("organ_id", res.data.user.org_id);
               history.push("/org-campaigns");
             } else {
               history.push("/all-campaigns");
