@@ -7,8 +7,10 @@ import OrgCampaign from "./OrgCampaign";
 import { getOrgCampaigns, deleteCampaign } from "../actions/action";
 
 function OrgCampaigns(props) {
+  const orgId = localStorage.getItem("organ_id");
+
   useEffect(() => {
-    props.getOrgCampaigns();
+    props.getOrgCampaigns(orgId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -26,7 +28,7 @@ function OrgCampaigns(props) {
         <div>
           {props.campaigns.map(campaign => (
             <OrgCampaign
-              key={campaign.campaigns_id}
+              key={campaign.id}
               campaign={campaign}
               handleDelete={handleDelete}
             />

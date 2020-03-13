@@ -19,18 +19,18 @@ const Campaign = props => {
     <div className="campaign-card">
       <img
         className="campaign-img"
-        src={props.campaign.image_url}
+        src={props.campaign.photo_url}
         alt={props.campaign.species}
       />
       <div className="campaign-info">
         <h2>{props.campaign.title}</h2>
-        <h3 className="org-name">
-          {orgSwitch(props.campaign.organization_id)}
-        </h3>
+        <h3 className="org-name">{props.campaign.org_name}</h3>
+        <p>{props.campaign.description}</p>
         <h3>Location: {props.campaign.location}</h3>
         <h3>Species: {props.campaign.species}</h3>
-        <h3>Urgency: {props.campaign.urgency}</h3>
-        <h3>Funding Recieved: ${props.campaign.funding_received}</h3>
+        <h3>Urgency: {props.campaign.urgency_level}</h3>
+        <h3>Funding Goal: ${props.campaign.funding_goal}</h3>
+        <h3>Deadline: ${props.campaign.deadline}</h3>
       </div>
     </div>
   );

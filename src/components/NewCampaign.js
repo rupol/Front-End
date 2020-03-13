@@ -6,11 +6,13 @@ import { createCampaign } from "../actions/action";
 function NewCampaign(props) {
   const [newCampaign, setNewCampaign] = useState({
     title: "",
+    description: "",
     location: "",
     species: "",
-    urgency: "",
-    image_url: "",
-    organization_id: Number(localStorage.getItem("organ_id"))
+    urgency_level: "",
+    funding_goal: "",
+    deadline: "",
+    photo_url: ""
   });
 
   const handleChanges = event => {
@@ -36,6 +38,16 @@ function NewCampaign(props) {
           name="title"
           placeholder="Campaign Title"
           value={newCampaign.title}
+          onChange={handleChanges}
+          required
+        />
+        <label htmlFor="formTitle">Description</label>
+        <textarea
+          type="textarea"
+          id="formDescription"
+          name="description"
+          placeholder="Campaign Description"
+          value={newCampaign.description}
           onChange={handleChanges}
           required
         />
@@ -65,9 +77,21 @@ function NewCampaign(props) {
           min="1"
           max="10"
           id="formUrgency"
-          name="urgency"
+          name="urgency_level"
           placeholder="Urgency"
-          value={newCampaign.urgency}
+          value={newCampaign.urgency_level}
+          onChange={handleChanges}
+          required
+        />
+        <label htmlFor="formUrgency">Funding Goal</label>
+        <input
+          type="number"
+          min="1"
+          max="1000000"
+          id="formFunding"
+          name="funding_goal"
+          placeholder="Funding Goal"
+          value={newCampaign.funding_goal}
           onChange={handleChanges}
           required
         />
@@ -75,9 +99,9 @@ function NewCampaign(props) {
         <input
           type="text"
           id="formImage"
-          name="image_url"
-          placeholder="Image Url"
-          value={newCampaign.image_url}
+          name="photo_url"
+          placeholder="Photo Url"
+          value={newCampaign.photo_url}
           onChange={handleChanges}
         />
         <button className="btn" type="submit">

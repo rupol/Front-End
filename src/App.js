@@ -24,9 +24,9 @@ function App(props) {
   return (
     <div className="App">
       <nav>
-        <a className="logo" href="https://keyconservation.netlify.com/">
+        <NavLink className="logo" exact to="/all-campaigns">
           Key Conservation
-        </a>
+        </NavLink>
         {!loggedIn && (
           <>
             <NavLink exact to="/login">
@@ -81,10 +81,11 @@ function App(props) {
           ) : loggedIn && userType === "supporter" ? (
             <Route exact path="/" component={AllCampaigns} />
           ) : (
-            <Route exact path="/" component={Login} />
+            <Route exact path="/" component={AllCampaigns} />
           )}
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/all-campaigns" component={AllCampaigns} />
           <ProtectedRoute
             exact
             path="/org-campaigns"
@@ -95,11 +96,7 @@ function App(props) {
             path="/org-campaigns/:id"
             component={UpdateCampaign}
           />
-          <ProtectedRoute
-            exact
-            path="/all-campaigns"
-            component={AllCampaigns}
-          />
+
           <ProtectedRoute exact path="/new-campaign" component={NewCampaign} />
           <ProtectedRoute exact path="/logout" component={Logout} />
         </>

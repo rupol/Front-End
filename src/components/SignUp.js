@@ -14,8 +14,8 @@ function SignUp(props) {
     username: "",
     email: "",
     password: "",
-    userType: "",
-    organization_id: 1
+    user_type: "",
+    org_id: 1
   });
 
   useEffect(() => {
@@ -46,7 +46,7 @@ function SignUp(props) {
 
   const handleSubmit = event => {
     event.preventDefault();
-    props.setOrganID(Number(user.organization_id));
+    props.setOrganID(Number(user.org_id));
     props.signUp(user, props.userType, props.history);
   };
 
@@ -87,7 +87,7 @@ function SignUp(props) {
             <label htmlFor="organization">Organization</label>
             <input
               type="radio"
-              name="userType"
+              name="user_type"
               id="organization"
               value="organization"
               onChange={setUserType}
@@ -98,7 +98,7 @@ function SignUp(props) {
             <label htmlFor="supporter">Supporter</label>
             <input
               type="radio"
-              name="userType"
+              name="user_type"
               id="supporter"
               value="support"
               onChange={setUserType}
@@ -106,12 +106,12 @@ function SignUp(props) {
             />
           </div>
         </div>
-        {user.userType === "organization" && (
+        {user.user_type === "organization" && (
           <div className="org-select">
-            <label htmlFor="organization_id">
+            <label htmlFor="org_id">
               Select your organization: <br />
             </label>
-            <select name="organization_id" onChange={handleChange}>
+            <select name="org_id" onChange={handleChange}>
               {props.orgList.map(org => (
                 <option required key={org.id} value={org.id}>
                   {org.name}
@@ -134,7 +134,7 @@ function SignUp(props) {
 const mapStateToProps = state => {
   return {
     orgList: state.orgList,
-    userType: state.userType
+    userType: state.user_type
   };
 };
 

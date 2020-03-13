@@ -8,26 +8,33 @@ import {
 } from "../actions/action";
 
 function UpdateCampaign(props) {
+  const orgId = localStorage.getItem("organ_id");
+
   const [campaign, setCampaign] = useState({
     title: "",
+    description: "",
     location: "",
     species: "",
-    urgency: "",
-    image_url: "",
-    organization_id: Number(localStorage.getItem("organ_id"))
+    urgency_level: "",
+    funding_goal: "",
+    deadline: "",
+    photo_url: ""
   });
 
   useEffect(() => {
-    props.getOrgCampaigns();
+    props.getOrgCampaigns(orgId);
     props.campaigns.map(camp => {
-      camp.campaigns_id === Number(props.match.params.id) &&
+      camp.id === Number(props.match.params.id) &&
         setCampaign({
           ...campaign,
           title: camp.title,
+          description: camp.description,
           location: camp.location,
           species: camp.species,
-          urgency: camp.urgency,
-          image_url: camp.image_url
+          urgency_level: camp.urgency_level,
+          funding_goal: camp.funding_goal,
+          deadline: camp.deadline,
+          photo_url: camp.photo_url
         });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -69,6 +76,17 @@ function UpdateCampaign(props) {
           placeholder="Campaign Title"
           value={campaign.title}
           onChange={handleChanges}
+          required
+        />
+        <label htmlFor="formTitle">Description</label>
+        <textarea
+          type="textarea"
+          id="formDescription"
+          name="description"
+          placeholder="Campaign Description"
+          value={campaign.description}
+          onChange={handleChanges}
+          required
         />
         <label htmlFor="formLocation">Location</label>
         <input
@@ -78,6 +96,7 @@ function UpdateCampaign(props) {
           placeholder="Location"
           value={campaign.location}
           onChange={handleChanges}
+          required
         />
         <label htmlFor="formSpecies">Species</label>
         <input
@@ -87,6 +106,7 @@ function UpdateCampaign(props) {
           placeholder="Species"
           value={campaign.species}
           onChange={handleChanges}
+          required
         />
         <label htmlFor="formUrgency">Urgency (1 = least urgent)</label>
         <input
@@ -94,18 +114,31 @@ function UpdateCampaign(props) {
           min="1"
           max="10"
           id="formUrgency"
-          name="urgency"
-          placeholder="Urgency (1=most urgent)"
-          value={campaign.urgency}
+          name="urgency_level"
+          placeholder="Urgency"
+          value={campaign.urgency_level}
           onChange={handleChanges}
+          required
+        />
+        <label htmlFor="formUrgency">Funding Goal</label>
+        <input
+          type="number"
+          min="1"
+          max="1000000"
+          id="formFunding"
+          name="funding_goal"
+          placeholder="Funding Goal"
+          value={campaign.funding_goal}
+          onChange={handleChanges}
+          required
         />
         <label htmlFor="formImage">Image URL</label>
         <input
           type="text"
           id="formImage"
-          name="image_url"
-          placeholder="Image Url"
-          value={campaign.image_url}
+          name="photo_url"
+          placeholder="Photo Url"
+          value={campaign.photo_url}
           onChange={handleChanges}
         />
         <button className="btn" type="submit">
