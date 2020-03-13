@@ -1,8 +1,8 @@
-# Save the Animals App
+# Key Conservation App
 
 > Save the Animals connects conservation supporters with the causes they care most about.
 
-This is an app designed during a Lambda School build week.
+This is a new release of an app originally designed during a Lambda School build week.
 
 #### Product Canvas:
 
@@ -18,8 +18,9 @@ https://docs.google.com/document/d/1hKwpOFU0eTH6AXeY_pyHbktlzEsWLjxyXapTDsozt5E/
 
 ## Meta
 
-Created by:
+New Release By: Ruth Poliakon (front end and back end)
 
+Original Build Week Team:
 - UI Team
 
   - Danial Winston
