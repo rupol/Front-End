@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
 import { connect } from "react-redux";
 import {
   fetchOrgList,
   setUserType,
   setOrganID,
-  LogIn
+  signUp
 } from "../actions/action";
 
 function SignUp(props) {
@@ -16,11 +15,12 @@ function SignUp(props) {
     email: "",
     password: "",
     userType: "",
-    organization_id: null
+    organization_id: 1
   });
 
   useEffect(() => {
     props.fetchOrgList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChange = event => {
@@ -31,90 +31,98 @@ function SignUp(props) {
   };
 
   const setUserType = event => {
-    if (user.userType === "organization") {
+    setUser({
+      ...user,
+      [event.target.name]: event.target.value
+    });
+    if (event.target.value === "organization") {
       props.setUserType("organization");
-      props.setOrganID(user.organization_id);
+      localStorage.setItem("user_type", "organization");
     } else {
       props.setUserType("supporter");
+      localStorage.setItem("user_type", "supporter");
     }
   };
 
   const handleSubmit = event => {
     event.preventDefault();
-    setUserType();
-    axios
-      .post("https://saving-the-animals.herokuapp.com/api/auth/register", user)
-      .then(res => {
-        console.log(res);
-        props.LogIn(user, props.userType, props.history);
-      })
-      .catch(err => console.log(err));
+    props.setOrganID(Number(user.organization_id));
+    props.signUp(user, props.userType, props.history);
   };
 
   return (
     <div className="main-section">
-      <h2>Sign Up</h2>
+      <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
+        <label htmlFor="username">Username</label>
         <input
           type="text"
           name="username"
           placeholder="Username"
           value={user.username}
           onChange={handleChange}
+          required
         />
+        <label htmlFor="email">Email</label>
         <input
           type="email"
           name="email"
           placeholder="Email"
           value={user.email}
           onChange={handleChange}
+          required
         />
+        <label htmlFor="password">Password</label>
         <input
           type="password"
           name="password"
           placeholder="Password"
           value={user.password}
           onChange={handleChange}
+          required
         />
-        <input
-          type="radio"
-          name="userType"
-          id="organization"
-          value="organization"
-          onChange={handleChange}
-        />
-        <label htmlFor="organization">Organization</label>
-        <input
-          type="radio"
-          name="userType"
-          id="supporter"
-          value="support"
-          onChange={handleChange}
-        />
-        <label htmlFor="supporter">Supporter</label>
+        <div className="user-type-inputs">
+          <p>Account Type</p>
+          <div className="user-input org-input">
+            <label htmlFor="organization">Organization</label>
+            <input
+              type="radio"
+              name="userType"
+              id="organization"
+              value="organization"
+              onChange={setUserType}
+              required
+            />
+          </div>
+          <div className="user-input supp-input">
+            <label htmlFor="supporter">Supporter</label>
+            <input
+              type="radio"
+              name="userType"
+              id="supporter"
+              value="support"
+              onChange={setUserType}
+              required
+            />
+          </div>
+        </div>
         {user.userType === "organization" && (
-          <div>
+          <div className="org-select">
             <label htmlFor="organization_id">
               Select your organization: <br />
             </label>
             <select name="organization_id" onChange={handleChange}>
-              <option disabled onChange={handleChange}>
-                Select your organization:
-              </option>
               {props.orgList.map(org => (
-                <option
-                  required
-                  key={org.id}
-                  value={org.id}
-                  onChange={handleChange}
-                >
+                <option required key={org.id} value={org.id}>
                   {org.organ_name}
                 </option>
               ))}
             </select>
           </div>
         )}
-        <button type="submit">Sign Up</button>
+        <button className="btn" type="submit">
+          Sign Up
+        </button>
       </form>
       <h3>
         Already have an account? <Link to="/login">Log In</Link>
@@ -134,5 +142,5 @@ export default connect(mapStateToProps, {
   fetchOrgList,
   setUserType,
   setOrganID,
-  LogIn
+  signUp
 })(SignUp);

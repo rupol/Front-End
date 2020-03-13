@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import api from "../utils/api";
 import { connect } from "react-redux";
+
+import { createCampaign } from "../actions/action";
 
 function NewCampaign(props) {
   const [newCampaign, setNewCampaign] = useState({
@@ -9,7 +10,7 @@ function NewCampaign(props) {
     species: "",
     urgency: "",
     image_url: "",
-    organization_id: Number(props.organID)
+    organization_id: Number(localStorage.getItem("organ_id"))
   });
 
   const handleChanges = event => {
@@ -21,23 +22,14 @@ function NewCampaign(props) {
 
   const handleSubmit = event => {
     event.preventDefault();
-    api()
-      .post("/campaigns", newCampaign)
-      .then(res => {
-        props.history.push("/org-campaigns");
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    props.createCampaign(newCampaign, props.history);
   };
 
   return (
     <div className="main-section">
       <h1>Add a New Campaign</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="formTitle" hidden>
-          Campaign Title:
-        </label>
+        <label htmlFor="formTitle">Title</label>
         <input
           type="text"
           id="formTitle"
@@ -45,10 +37,9 @@ function NewCampaign(props) {
           placeholder="Campaign Title"
           value={newCampaign.title}
           onChange={handleChanges}
+          required
         />
-        <label htmlFor="formLocation" hidden>
-          Location:
-        </label>
+        <label htmlFor="formLocation">Location</label>
         <input
           type="text"
           id="formLocation"
@@ -56,10 +47,9 @@ function NewCampaign(props) {
           placeholder="Location"
           value={newCampaign.location}
           onChange={handleChanges}
+          required
         />
-        <label htmlFor="formSpecies" hidden>
-          Species:
-        </label>
+        <label htmlFor="formSpecies">Species</label>
         <input
           type="text"
           id="formSpecies"
@@ -67,21 +57,32 @@ function NewCampaign(props) {
           placeholder="Species"
           value={newCampaign.species}
           onChange={handleChanges}
+          required
         />
-        <label htmlFor="formUrgency" hidden>
-          Urgency:
-        </label>
+        <label htmlFor="formUrgency">Urgency (1 = least urgent)</label>
         <input
           type="number"
           min="1"
           max="10"
           id="formUrgency"
           name="urgency"
-          placeholder="Urgency (1=most urgent)"
+          placeholder="Urgency"
           value={newCampaign.urgency}
           onChange={handleChanges}
+          required
         />
-        <button type="submit">Add Campaign</button>
+        <label htmlFor="formImage">Image URL</label>
+        <input
+          type="text"
+          id="formImage"
+          name="image_url"
+          placeholder="Image Url"
+          value={newCampaign.image_url}
+          onChange={handleChanges}
+        />
+        <button className="btn" type="submit">
+          Add
+        </button>
       </form>
     </div>
   );
@@ -94,4 +95,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {})(NewCampaign);
+export default connect(mapStateToProps, { createCampaign })(NewCampaign);

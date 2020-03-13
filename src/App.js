@@ -14,62 +14,105 @@ import { getToken } from "./utils/api";
 import UpdateCampaign from "./components/UpdateCampaign";
 import AllCampaigns from "./components/AllCampaigns";
 
+import loader from "./img/loader.gif";
+import error from "./img/error.jpg";
+
 function App(props) {
   const loggedIn = getToken();
+  const userType = localStorage.getItem("user_type");
 
   return (
     <div className="App">
-      <h1>Save the Animals</h1>
-      <NavLink to="/">Home</NavLink>
-      {!loggedIn && (
-        <NavLink exact to="/login">
-          Log In
-        </NavLink>
-      )}
-      {!loggedIn && (
-        <NavLink exact to="/signup">
-          Sign Up
-        </NavLink>
-      )}
-      {loggedIn && props.userType === "organization" ? (
-        <>
-          <NavLink exact to="/org-campaigns">
-            Campaigns
+      <nav>
+        <a className="logo" href="https://keyconservation.netlify.com/">
+          Key Conservation
+        </a>
+        {!loggedIn && (
+          <>
+            <NavLink exact to="/login">
+              Log In
+            </NavLink>
+
+            <NavLink exact to="/signup">
+              Sign Up
+            </NavLink>
+          </>
+        )}
+        {loggedIn && userType === "organization" ? (
+          <>
+            <NavLink exact to="/org-campaigns">
+              Campaigns
+            </NavLink>
+            <NavLink exact to="/new-campaign">
+              New Campaign
+            </NavLink>
+          </>
+        ) : loggedIn && userType === "supporter" ? (
+          <NavLink exact to="/all-campaigns">
+            All Campaigns
           </NavLink>
-          <NavLink exact to="/new-campaign">
-            New Campaign
+        ) : (
+          <></>
+        )}
+        {loggedIn && (
+          <NavLink exact to="/logout">
+            Log Out
           </NavLink>
-        </>
-      ) : loggedIn && props.userType === "supporter" ? (
-        <NavLink exact to="/all-campaigns">
-          All Campaigns
-        </NavLink>
+        )}
+      </nav>
+      {props.isLoading ? (
+        <img src={loader} alt="loading" className="loader" />
+      ) : props.error ? (
+        <div className="oops">
+          <img src={error} alt="error" className="error-img" />
+          <h2 className="error">
+            <span>
+              Sorry, something has gone wrong
+              <span className="spacer"></span>
+              <br />
+              <span className="spacer"></span> Please try again
+            </span>
+          </h2>
+        </div>
       ) : (
-        <></>
+        <>
+          {loggedIn && userType === "organization" ? (
+            <Route exact path="/" component={OrgCampaigns} />
+          ) : loggedIn && userType === "supporter" ? (
+            <Route exact path="/" component={AllCampaigns} />
+          ) : (
+            <Route exact path="/" component={Login} />
+          )}
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={SignUp} />
+          <ProtectedRoute
+            exact
+            path="/org-campaigns"
+            component={OrgCampaigns}
+          />
+          <ProtectedRoute
+            exact
+            path="/org-campaigns/:id"
+            component={UpdateCampaign}
+          />
+          <ProtectedRoute
+            exact
+            path="/all-campaigns"
+            component={AllCampaigns}
+          />
+          <ProtectedRoute exact path="/new-campaign" component={NewCampaign} />
+          <ProtectedRoute exact path="/logout" component={Logout} />
+        </>
       )}
-      {loggedIn && (
-        <NavLink exact to="/logout">
-          Log Out
-        </NavLink>
-      )}
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/signup" component={SignUp} />
-      <ProtectedRoute exact path="/org-campaigns" component={OrgCampaigns} />
-      <ProtectedRoute
-        exact
-        path="/org-campaigns/:id"
-        component={UpdateCampaign}
-      />
-      <ProtectedRoute exact path="/all-campaigns" component={AllCampaigns} />
-      <ProtectedRoute exact path="/new-campaign" component={NewCampaign} />
-      <ProtectedRoute exact path="/logout" component={Logout} />
     </div>
   );
 }
 
 const mapStateToProps = state => {
   return {
-    userType: state.userType
+    userType: state.userType,
+    isLoading: state.isLoading,
+    error: state.error
   };
 };
 

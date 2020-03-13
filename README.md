@@ -1,68 +1,51 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Save the Animals App
 
-## Available Scripts
+> Save the Animals connects conservation supporters with the causes they care most about.
 
-In the project directory, you can run:
+This is an app designed during a Lambda School build week.
 
-### `npm start`
+#### Product Canvas:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+https://docs.google.com/document/d/1hKwpOFU0eTH6AXeY_pyHbktlzEsWLjxyXapTDsozt5E/edit?usp=sharing
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Release History
 
-### `npm test`
+- 0.0.1
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  - Supporter and Organization Login/Signup Pages
+  - Organization Campaigns (add, edit, delete)
+  - Supporter Campaigns (view all campaigns, search by title, species, and location)
 
-### `npm run build`
+## Meta
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Created by:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- UI Team
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  - Danial Winston
+  - Julisa Diego
+  - Adam Maley
 
-### `npm run eject`
+- Front End Team
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+  - Ruth Poliakon
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Project Lead
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+  - May Ng
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Dependencies
 
-## Learn More
+- axios v0.19.0
+- react-router-dom v5.0.2
+- react-redux v7.1.3
+- redux-logger v3.0.6
+- redux-thunk v2.3.0
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Contributing
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+1. Fork it (<https://github.com/yourname/yourproject/fork>)
+2. Create your feature branch (`git checkout -b feature/fooBar`)
+3. Commit your changes (`git commit -am 'Add some fooBar'`)
+4. Push to the branch (`git push origin feature/fooBar`)
+5. Create a new Pull Request
