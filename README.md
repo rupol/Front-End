@@ -1,6 +1,6 @@
 # Key Conservation App
 
-> Save the Animals connects conservation supporters with the causes they care most about.
+> Key Conservation connects conservation supporters with the causes they care most about.
 
 This is a new release of an app originally designed during a Lambda School build week.
 
