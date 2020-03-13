@@ -6,7 +6,7 @@ export function getToken() {
 
 export default function() {
   return axios.create({
-    baseURL: "https://saving-the-animals.herokuapp.com/api",
+    baseURL: "https://key-conservation-app.herokuapp.com/api",
     headers: {
       Authorization: getToken()
     }

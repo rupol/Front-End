@@ -37,13 +37,13 @@ export function LogIn(user, userType, history) {
   return dispatch => {
     dispatch({ type: REQUEST_START });
     api()
-      .post("/auth/login", user)
+      .post("/login", user)
       .then(res => {
         dispatch({ type: REQUEST_SUCCESS });
         localStorage.setItem("token", res.data.token);
         if (userType === "organization") {
-          dispatch({ type: SET_ORGAN_ID, payload: res.data.organ_id });
-          localStorage.setItem("organ_id", res.data.organ_id);
+          dispatch({ type: SET_ORGAN_ID, payload: res.data.org_id });
+          localStorage.setItem("organ_id", res.data.org_id);
           history.push("/org-campaigns");
         } else {
           history.push("/all-campaigns");
@@ -59,16 +59,16 @@ export function signUp(user, userType, history) {
   return dispatch => {
     dispatch({ type: REQUEST_START });
     api()
-      .post("/auth/register", user)
+      .post("/register", user)
       .then(res => {
         api()
-          .post("/auth/login", user)
+          .post("/login", user)
           .then(res => {
             dispatch({ type: REQUEST_SUCCESS });
             localStorage.setItem("token", res.data.token);
             if (userType === "organization") {
-              dispatch({ type: SET_ORGAN_ID, payload: res.data.organ_id });
-              localStorage.setItem("organ_id", res.data.organ_id);
+              dispatch({ type: SET_ORGAN_ID, payload: res.data.org_id });
+              localStorage.setItem("organ_id", res.data.org_id);
               history.push("/org-campaigns");
             } else {
               history.push("/all-campaigns");
@@ -84,11 +84,11 @@ export function signUp(user, userType, history) {
   };
 }
 
-export function getOrgCampaigns() {
+export function getOrgCampaigns(orgID) {
   return dispatch => {
     // dispatch({ type: REQUEST_START });
     api()
-      .get("/campaigns/organizations")
+      .get(`/organizations/${orgID}`)
       .then(res => {
         dispatch({ type: SET_CAMPAIGNS, payload: res.data.campaigns });
         dispatch({ type: REQUEST_SUCCESS });
@@ -103,7 +103,7 @@ export function getSuppCampaigns() {
   return dispatch => {
     // dispatch({ type: REQUEST_START });
     api()
-      .get("/campaigns/supporters")
+      .get("/campaigns")
       .then(res => {
         dispatch({ type: SET_CAMPAIGNS, payload: res.data.campaigns });
         dispatch({ type: REQUEST_SUCCESS });

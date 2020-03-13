@@ -114,7 +114,7 @@ function SignUp(props) {
             <select name="organization_id" onChange={handleChange}>
               {props.orgList.map(org => (
                 <option required key={org.id} value={org.id}>
-                  {org.organ_name}
+                  {org.name}
                 </option>
               ))}
             </select>
