@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import moment from "moment";
 
 import {
   updateCampaign,
   getOrgCampaigns,
-  deleteCampaign
+  deleteCampaign,
 } from "../actions/action";
 
 function UpdateCampaign(props) {
@@ -18,12 +19,12 @@ function UpdateCampaign(props) {
     urgency_level: "",
     funding_goal: "",
     deadline: "",
-    photo_url: ""
+    photo_url: "",
   });
 
   useEffect(() => {
     props.getOrgCampaigns(orgId);
-    props.campaigns.map(camp => {
+    props.campaigns.map((camp) => {
       camp.id === Number(props.match.params.id) &&
         setCampaign({
           ...campaign,
@@ -34,20 +35,20 @@ function UpdateCampaign(props) {
           urgency_level: camp.urgency_level,
           funding_goal: camp.funding_goal,
           deadline: camp.deadline,
-          photo_url: camp.photo_url
+          photo_url: camp.photo_url,
         });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.match.params.id]);
 
-  const handleChanges = event => {
+  const handleChanges = (event) => {
     setCampaign({
       ...campaign,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
 
-  const handleDelete = event => {
+  const handleDelete = (event) => {
     event.preventDefault();
     window.confirm(
       "Are you sure you want to delete this campaign? This action cannot be undone"
@@ -55,11 +56,11 @@ function UpdateCampaign(props) {
     props.history.push("/org-campaigns");
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     setCampaign({
       ...campaign,
-      organization_id: Number(localStorage.getItem("organ_id"))
+      organization_id: Number(localStorage.getItem("organ_id")),
     });
     props.updateCampaign(campaign, props.match.params.id, props.history);
   };
@@ -120,7 +121,7 @@ function UpdateCampaign(props) {
           onChange={handleChanges}
           required
         />
-        <label htmlFor="formUrgency">Funding Goal</label>
+        <label htmlFor="formFunding">Funding Goal</label>
         <input
           type="number"
           min="1"
@@ -129,6 +130,17 @@ function UpdateCampaign(props) {
           name="funding_goal"
           placeholder="Funding Goal"
           value={campaign.funding_goal}
+          onChange={handleChanges}
+          required
+        />
+        <label htmlFor="formDeadline">Deadline</label>
+        <input
+          type="date"
+          id="formDeadline"
+          name="deadline"
+          placeholder="Deadline"
+          value={moment(campaign.deadline).format("YYYY-MM-DD")}
+          // value={campaign.deadline}
           onChange={handleChanges}
           required
         />
@@ -156,15 +168,15 @@ function UpdateCampaign(props) {
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     organID: state.organID,
-    campaigns: state.campaigns
+    campaigns: state.campaigns,
   };
 };
 
 export default connect(mapStateToProps, {
   updateCampaign,
   getOrgCampaigns,
-  deleteCampaign
+  deleteCampaign,
 })(UpdateCampaign);

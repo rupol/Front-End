@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Moment from "react-moment";
 
-const OrgCampaign = props => {
+const OrgCampaign = (props) => {
   return (
     <div className="campaign-card">
       <img
@@ -16,7 +17,10 @@ const OrgCampaign = props => {
         <h3>Species: {props.campaign.species}</h3>
         <h3>Urgency: {props.campaign.urgency_level}</h3>
         <h3>Funding Goal: ${props.campaign.funding_goal}</h3>
-        <h3>Deadline: ${props.campaign.deadline}</h3>
+        <h3>
+          Deadline:{" "}
+          <Moment format="MMM D YYYY">{props.campaign.deadline}</Moment>
+        </h3>
       </div>
 
       <div className="campaign-buttons">

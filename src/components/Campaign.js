@@ -1,20 +1,7 @@
 import React from "react";
+import Moment from "react-moment";
 
-const Campaign = props => {
-  function orgSwitch(org) {
-    switch (org) {
-      case 1:
-        return "African Wildlife Foundation";
-      case 2:
-        return "Clearwater Marine Foundation";
-      case 3:
-        return "African Animals Rescue";
-      case 4:
-        return "Kanya Animals House";
-      default:
-        return null;
-    }
-  }
+const Campaign = (props) => {
   return (
     <div className="campaign-card">
       <img
@@ -30,7 +17,10 @@ const Campaign = props => {
         <h3>Species: {props.campaign.species}</h3>
         <h3>Urgency: {props.campaign.urgency_level}</h3>
         <h3>Funding Goal: ${props.campaign.funding_goal}</h3>
-        <h3>Deadline: ${props.campaign.deadline}</h3>
+        <h3>
+          Deadline:{" "}
+          <Moment format="MMM D YYYY">{props.campaign.deadline}</Moment>
+        </h3>
       </div>
     </div>
   );
