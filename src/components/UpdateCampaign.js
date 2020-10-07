@@ -24,7 +24,7 @@ function UpdateCampaign(props) {
 
   useEffect(() => {
     props.getOrgCampaigns(orgId);
-    props.campaigns.map((camp) => {
+    props.campaigns.forEach((camp) => {
       camp.id === Number(props.match.params.id) &&
         setCampaign({
           ...campaign,
