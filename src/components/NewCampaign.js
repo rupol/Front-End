@@ -12,17 +12,17 @@ function NewCampaign(props) {
     urgency_level: "",
     funding_goal: "",
     deadline: "",
-    photo_url: ""
+    photo_url: "",
   });
 
-  const handleChanges = event => {
+  const handleChanges = (event) => {
     setNewCampaign({
       ...newCampaign,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     props.createCampaign(newCampaign, props.history);
   };
@@ -83,7 +83,7 @@ function NewCampaign(props) {
           onChange={handleChanges}
           required
         />
-        <label htmlFor="formUrgency">Funding Goal</label>
+        <label htmlFor="formFunding">Funding Goal</label>
         <input
           type="number"
           min="1"
@@ -92,6 +92,16 @@ function NewCampaign(props) {
           name="funding_goal"
           placeholder="Funding Goal"
           value={newCampaign.funding_goal}
+          onChange={handleChanges}
+          required
+        />
+        <label htmlFor="formDeadline">Deadline</label>
+        <input
+          type="date"
+          id="formDeadline"
+          name="deadline"
+          placeholder="Deadline"
+          value={newCampaign.deadline}
           onChange={handleChanges}
           required
         />
@@ -112,10 +122,10 @@ function NewCampaign(props) {
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     user: state.user,
-    organID: state.organID
+    organID: state.organID,
   };
 };
 
