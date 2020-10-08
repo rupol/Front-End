@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, NavLink, withRouter } from "react-router-dom";
+import { Route, Switch, NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -75,7 +75,7 @@ function App(props) {
           </h2>
         </div>
       ) : (
-        <>
+        <Switch>
           {loggedIn && userType === "organization" ? (
             <Route exact path="/" component={OrgCampaigns} />
           ) : loggedIn && userType === "supporter" ? (
@@ -99,17 +99,17 @@ function App(props) {
 
           <ProtectedRoute exact path="/new-campaign" component={NewCampaign} />
           <ProtectedRoute exact path="/logout" component={Logout} />
-        </>
+        </Switch>
       )}
     </div>
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     userType: state.userType,
     isLoading: state.isLoading,
-    error: state.error
+    error: state.error,
   };
 };
 
