@@ -12,7 +12,8 @@ function NewCampaign(props) {
     urgency_level: "",
     funding_goal: "",
     deadline: "",
-    photo_url: "",
+    photo_url:
+      "https://images.unsplash.com/photo-1527701963793-33e969bca5ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9",
   });
 
   const handleChanges = (event) => {

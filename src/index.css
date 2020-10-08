@@ -359,17 +359,16 @@ label {
 }
 
 .campaign-card {
-  width           : 80%;
-  max-width       : 1200px;
-  margin          : 3rem auto;
-  padding         : 6rem 20px;
-  border          : none;
-  display         : flex;
-  flex-wrap       : wrap;
-  justify-content : space-evenly;
-  align-items     : center;
-  background-color: #343833;
-  color           : #ffffff;
+  width          : 80%;
+  max-width      : 1200px;
+  margin         : 3rem auto;
+  padding        : 6rem 20px;
+  border         : none;
+  display        : flex;
+  flex-wrap      : wrap;
+  justify-content: space-evenly;
+  align-items    : center;
+  color          : #343833;
 }
 
 .campaign-img {
@@ -378,11 +377,13 @@ label {
   object-fit: cover;
   box-shadow: 8px 8px 0px #00ff9d, -8px -8px 0px #caff34;
   margin    : 0 0 20px;
+  width     : 100%;
 }
 
 .campaign-info {
   padding   : 0 3%;
   text-align: left;
+  width     : 100%;
 }
 
 .campaign-buttons {
@@ -522,10 +523,6 @@ label {
   .error span {
     font-size  : 2rem;
     line-height: 6rem;
-  }
-
-  .campaign-img {
-    width: 100%;
   }
 }
 
